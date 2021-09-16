@@ -14,3 +14,6 @@
 
 
 | Salik Chodhary | chodhary | 1006115892 | salik.chodhary@mail.utoronto.ca | email | Sumlight
+
+
+**Discord Chat/Server Invite :** https://discord.gg/qHQJEbYX
