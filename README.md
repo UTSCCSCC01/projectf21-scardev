@@ -1,5 +1,5 @@
-# projectf21-scardev
-projectf21-scardev created by GitHub Classroom
+# OpenRun
+Presented by ScarDev - Vigaash, Rahul, Damian, Jameson, and Salik
 
 
 ## Motivation
