@@ -1,11 +1,19 @@
 ## **User Stories**
 
 
--As a user, I want to be able to create an account so that I can use the app. 
-  -CoS: 
-	  -User can create an account 
-	  -User can login to an existing account 
-	  -User is taken to homepage after logging in 
+- As a user, I want to be able to create an account so that I can use the app. 
+
+
+  - CoS: 
+  
+  
+	  - User can create an account 
+	  
+	  
+	  - User can login to an existing account 
+	  
+	  
+	  - User is taken to homepage after logging in 
 
 
 -As a player, I’d like to be able to have a profile so I can add my skill set (position, height, etc) and teams can add me to their roster if I am a good fit.
