@@ -11,9 +11,9 @@ Our project takes inspiration from the concept of an “open run”. It’s a ba
 ## Installation
 
 ## Contribution
-Do you use git flow? Yes, we do.
-What do you name your branches? Main branch, develop branch, feature branches which will would be named after the feature.
-Do you use github issues or another ticketing website? JIRA
-Do you use pull requests? Yes, we do.
+Do you use git flow? Yes, we do.<br />
+What do you name your branches? Main branch, develop branch, feature branches which will would be named after the feature.<br />
+Do you use github issues or another ticketing website? JIRA<br />
+Do you use pull requests? Yes, we do.<br />
 
 ## 
