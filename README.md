@@ -13,11 +13,15 @@ Our project takes inspiration from the concept of an “open run”. It’s a ba
 ## Contribution
 Q: Do you use git flow?<br /> 
 A: Yes, we do.<br />
+<br />
 Q: What do you name your branches?<br />
 A: Main branch, develop branch, feature branches which will would be named after the feature.<br />
+<br />
 Q: Do you use github issues or another ticketing website?<br />
 A: JIRA<br />
+<br />
 Q: Do you use pull requests?<br /> 
 A: Yes, we do.<br />
+<br />
 
 ## 
