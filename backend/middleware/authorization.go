@@ -10,9 +10,14 @@ import (
 )
 
 var secretKey = []byte(os.Getenv("SECRET_KEY"))
-func hasAuthHeader(r *http.Request) (string, bool) {
+func getTokenString(r *http.Request) (string, bool) {
 	ts, in := r.Header["Authorization"] 
-	return ts[0], in
+
+	if !in {
+		return "", false
+	}
+	
+	return ts[0], true
 }
 
 func getTokenFromString(tokenString string) (*jwt.Token, bool) {
@@ -30,32 +35,48 @@ func getTokenFromString(tokenString string) (*jwt.Token, bool) {
 	return token, false
 }
 
-func isValidToken(tokenString string) bool {
+func getClaimsMapFromToken(tokenString string) (jwt.MapClaims, bool) {
 	token, hasErr := getTokenFromString(tokenString)
 
 	if hasErr {
-		return false
+		return nil, false
 	}
 
-	_, validClaims := token.Claims.(jwt.MapClaims)
+	m, validClaims := token.Claims.(jwt.MapClaims)
 	validToken := token.Valid
 	
-	return validClaims && validToken
+	if !validClaims || !validToken {
+		return nil, false
+	}
+	
+	return m, true
 }
 
-func isAuthorizedRequest(r *http.Request) bool {
-	val, hasToken := hasAuthHeader(r)
+func getEmailFromToken(r *http.Request) (string, bool) {
+	val, ok := getTokenString(r)
 
-	return hasToken && isValidToken(val)
+	if !ok {
+		return "", false
+	}
+
+	m, ok := getClaimsMapFromToken(val)
+
+	if !ok {
+		return "", false
+	}
+
+	return m["sub"].(string), true
 }
 
 func IsJWTAuthorized(handler func(http.ResponseWriter, *http.Request)) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		 
-		if isAuthorizedRequest(r) {
+		email, ok := getEmailFromToken(r)
+
+		if !ok {
 			helpers.SendResponse(helpers.Error, "unauthorized access", http.StatusUnauthorized, w)
 			return
 		}
+		r.Header.Set("OpenRun-Email", email)
 		handler(w, r)
 	})
 }

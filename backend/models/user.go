@@ -10,31 +10,32 @@ import (
 
 type User struct {
 	ID primitive.ObjectID `bson:"_id"`
-	FirstName *string `json:"first_name" validate:"required,max=100"`
-	LastName *string `json:"last_name" validate:"required,max=100"`
+	FirstName *string `json:"first_name" validate:"max=100"`
+	LastName *string `json:"last_name" validate:"max=100"`
 	Password *string `validate:"required"`
 	Email *string `validate:"required"`
-	Phone *string `validate:"required"`
+	Phone *string 
 	// UserId string `json:"user_id"`
 }
 
-func (u *User) IsExisting() (bool) {
-	filter := bson.D{{"email", u.Email}}
-	var res User
+func (u *User) IsExisting() (*User, bool) {
+	filter := bson.D{{Key: "email", Value: u.Email}}
+	res := &User{}
 	dbInstance, err := db.GetDatabase()
 
 	if err != nil {
-		return false
+		return nil, false
 	}
 
 	collection, err := dbInstance.OpenCollection("Users")
 
 	if err != nil {
-		return false
+		return nil, false
+		
 	}
-	err = collection.FindOne(context.TODO(), filter).Decode(&res)
+	err = collection.FindOne(context.TODO(), filter).Decode(res)
 
-	return err == nil
+	return res, err == nil
 }
 
 func (u *User)Insert() ([]byte, error) {
