@@ -1,19 +1,27 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
+
+	"openrun/routes"
+
+	"github.com/gorilla/mux"
 )
 
-func main() {
+type Server struct {
+	Router *mux.Router
+}
 
-    http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
-				w.Header().Set("Access-Control-Allow-Origin", "*")
-        fmt.Fprintf(w, "Hello, from the backend!")
-    })
+func New() *Server {
+	r := mux.NewRouter()
+	s := &Server{
+		Router: r,
+	}
+	routes.InitRoutes(r)
+	return s
+}
 
-
-    log.Fatal(http.ListenAndServe(":8081", nil))
-
+func (s *Server) Run() {
+	log.Fatal(http.ListenAndServe(":8080", s.Router))
 }
