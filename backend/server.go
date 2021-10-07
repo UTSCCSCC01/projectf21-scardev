@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"openrun/routes"
 
@@ -23,5 +24,7 @@ func New() *Server {
 }
 
 func (s *Server) Run() {
-	log.Fatal(http.ListenAndServe(":8080", s.Router))
+	port := os.Getenv("OPENRUN_PORT")
+	log.Println("server listening on port "+port)
+	log.Fatal(http.ListenAndServe(":"+port, s.Router))
 }

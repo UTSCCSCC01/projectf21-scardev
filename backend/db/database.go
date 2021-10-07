@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"fmt"
+	"log"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -14,7 +15,7 @@ type Database struct {
 }
 var db *Database
 func Init(mongoUri string, dbName string) (error) {
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://admin:admin@cluster0.l0byk.mongodb.net/OpenRun?retryWrites=true&w=majority"))
+	client, err := mongo.NewClient(options.Client().ApplyURI(mongoUri))
 	
 
 	if err != nil {
@@ -31,10 +32,10 @@ func Init(mongoUri string, dbName string) (error) {
 		return fmt.Errorf("unable to init mongo client: %w\n", err)
 	}
 
-	fmt.Println("Connected to MongoDB!")
+	log.Println("connected to mongodb")
 
 	db = &Database{
-		mongo: client.Database("OpenRun"),
+		mongo: client.Database(dbName),
 	}
 
 	return nil
