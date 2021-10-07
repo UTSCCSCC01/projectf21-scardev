@@ -11,6 +11,25 @@
     object-fit: cover;
 }
 
+.leftContainer {
+    background-image: url('../../assets/landingPageBasketball.png');
+    background-size: cover;
+    display: flex;
+    flex: 2;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+}
+
+.slogan {
+    font-size: 5.5vw;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: white;
+    width: 95%;
+    margin-left: 5%;
+}
+
 .rightContainer {
     display: flex;
     flex: 1;
@@ -22,8 +41,8 @@
 .title {
     font-family: 'Text Me One';
     color: #61D77B;
-    font-size: 72;
-    margin-bottom: 3%;
+    font-size: 72px;
+    margin-bottom: 4%;
 }
 
 .signUpBtn {
@@ -32,8 +51,14 @@
     border-radius: 5px;
     color: #fff;
     width: 200px;
-    margin-bottom: 3%;
+    margin-bottom: 4%;
     padding: 1% 2% 1% 2%;
+    transition: all .2s ease-in-out;
+}
+
+.signUpBtn:hover {
+    background-color: #4fc568;
+    transform: scale(1.05);
 }
 
 .signUpGoogleBtn {
@@ -42,13 +67,25 @@
     border-radius: 5px;
     color: #61D77B;
     width: 200px;
-    margin-bottom: 3%;
-    padding: 1% 2% 1% 2%
+    margin-bottom: 5%;
+    padding: 1% 2% 1% 2%;
+    transition: all .2s ease-in-out;
+    display: flex;
+    justify-content: space-around;
+}
+
+.signUpGoogleBtn:hover {
+    background-color: #ebebeb;
+    transform: scale(1.05);
+}
+
+.icon {
+    width: 25px;
 }
 
 .subText {
     font-family: 'Roboto';
-    font-size: 14;
+    font-size: 14px;
 }
 
 .link {
