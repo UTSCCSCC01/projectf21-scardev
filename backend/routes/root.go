@@ -2,6 +2,7 @@ package routes
 
 import (
 	"net/http"
+	"openrun/controller"
 	"openrun/helpers"
 
 	"github.com/gorilla/mux"
@@ -17,4 +18,6 @@ func InitRoutes(r *mux.Router) {
 		}
 		helpers.SendResponse(helpers.Success, t, 200, w)
 	})
+	uc := controller.UserController{}
+	r.HandleFunc("/signup", uc.Signup).Methods("POST")
 }
