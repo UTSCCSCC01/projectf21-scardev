@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.image {
+    display: flex;
+    flex: 2;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.rightContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-family: 'Text Me One';
+    color: #61D77B;
+    font-size: 72;
+    margin-bottom: 3%;
+}
+
+.signUpBtn {
+    background-color: #61D77B;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    width: 200px;
+    margin-bottom: 3%;
+    padding: 1% 2% 1% 2%;
+}
+
+.signUpGoogleBtn {
+    background-color: #f3f3f3;
+    border: none;
+    border-radius: 5px;
+    color: #61D77B;
+    width: 200px;
+    margin-bottom: 3%;
+    padding: 1% 2% 1% 2%
+}
+
+.subText {
+    font-family: 'Roboto';
+    font-size: 14;
+}
+
+.link {
+    color: #61D77B;
+}
