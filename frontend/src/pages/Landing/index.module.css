@@ -53,34 +53,17 @@
     width: 200px;
     margin-bottom: 4%;
     padding: 1% 2% 1% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     transition: all .2s ease-in-out;
 }
 
 .signUpBtn:hover {
     background-color: #4fc568;
     transform: scale(1.05);
-}
-
-.signUpGoogleBtn {
-    background-color: #f3f3f3;
-    border: none;
-    border-radius: 5px;
-    color: #61D77B;
-    width: 200px;
-    margin-bottom: 5%;
-    padding: 1% 2% 1% 2%;
-    transition: all .2s ease-in-out;
-    display: flex;
-    justify-content: space-around;
-}
-
-.signUpGoogleBtn:hover {
-    background-color: #ebebeb;
-    transform: scale(1.05);
-}
-
-.icon {
-    width: 25px;
+    color: white;
 }
 
 .subText {
@@ -88,6 +71,12 @@
     font-size: 14px;
 }
 
-.link {
+.signInLink {
     color: #61D77B;
+    text-decoration: none;
+}
+
+.signInLink:hover {
+    color: #4fc568;
+    text-decoration: underline;
 }
