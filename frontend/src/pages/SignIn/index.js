@@ -12,6 +12,7 @@ const SignIn = () => {
     const history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [err, setError] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,7 +27,16 @@ const SignIn = () => {
             body: JSON.stringify(payload)
         })
         .then(res => {
-            history.push('/home');
+            if (res.status == 200){
+                history.push('/home');
+                return
+            }
+            
+            if (res.status == 401) 
+                setError("Invalid login, try again.")
+            else
+                setError("Login request failed, please try again.")
+                
         })
     }
 
@@ -45,6 +55,11 @@ const SignIn = () => {
                 <label>Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={styles.inputLong}/>
 
+                {err !== "" && (
+                    <div className={styles.signIn}>
+                        <h6 className={styles.subText}>{err}</h6>
+                    </div>
+                )}
                 <div className={styles.submitContainer}>
                     <input type="submit" value="Login" className={styles.submit}/>
                 </div>
