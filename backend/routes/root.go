@@ -12,9 +12,11 @@ import (
 type test struct {
 	Name string
 }
+
 func testProtected(w http.ResponseWriter, r *http.Request) {
 	helpers.SendResponse(helpers.Success, "protected endpoint", http.StatusOK, w)
 }
+
 func InitRoutes(r *mux.Router) {
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		t := test{
@@ -24,42 +26,42 @@ func InitRoutes(r *mux.Router) {
 	})
 	uc := controller.UserController{}
 	/*
-	Expects - {
-		first_name: "name"
-		last_name: "last"
-		"password": "password",
-    "email": "email@gmail.com",
-    "phone": "4166666666"
-	}
+			Expects - {
+				first_name: "name"
+				last_name: "last"
+				"password": "password",
+		    "email": "email@gmail.com",
+		    "phone": "4166666666"
+			}
 
-	Returns on success - {
-		success: true
-		data: <userId>
-	}
+			Returns on success - {
+				success: true
+				data: <userId>
+			}
 
-	On error - {
-		success: false
-		error: <some_error_desc>
-	}
+			On error - {
+				success: false
+				error: <some_error_desc>
+			}
 	*/
 	r.HandleFunc("/signup", uc.Signup).Methods("POST")
 	/*
-	Expects - {
-		"password": "password",
-    "email": "email@gmail.com"
-	}
+			Expects - {
+				"password": "password",
+		    "email": "email@gmail.com"
+			}
 
-	Returns on success - {
-		success: true
-		data: <token>
-	}
+			Returns on success - {
+				success: true
+				data: <token>
+			}
 
-	set Authorization header to token in subsequent requests
+			set Authorization header to token in subsequent requests
 
-	On error - {
-		success: false
-		error: <some_error_desc>
-	}
+			On error - {
+				success: false
+				error: <some_error_desc>
+			}
 	*/
 	r.HandleFunc("/login", uc.Login).Methods("POST")
 	r.Handle("/protected", middleware.IsJWTAuthorized(testProtected)).Methods("GET")

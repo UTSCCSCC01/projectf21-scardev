@@ -8,6 +8,10 @@ import (
 	"github.com/joho/godotenv"
 )
 
+/*
+	Main entry point to backend. Loads environment variables, connects to
+	database, and starts server.
+*/
 func main() {
 	log.Println("loading environment and initiating db...")
 	err := godotenv.Load()
