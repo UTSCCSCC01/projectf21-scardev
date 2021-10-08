@@ -31,6 +31,7 @@ func SendResponse(rt ResponseType, message interface{}, code int, w http.Respons
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(code)
 	
 	
