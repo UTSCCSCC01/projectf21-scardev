@@ -4,12 +4,12 @@ The goal of OpenRun is to provide a web based application which allows users to 
 ## Scope
 Our release goals for each sprint are indicated below
 ### Sprint 1
-Allow users to log in, interact the free agent system and view other players
+> Allow users to log in, interact the free agent system and view other players
 ### Sprint 2
-Allow users to set up a team and keep track of accolades and scores
+> Allow users to set up a team and keep track of accolades and scores
 ### Sprint 3
-Allow users to view parks on the map and communicate with other users
+> Allow users to view parks on the map and communicate with other users
 ### Sprint 4
-Allow users to get a feed from their friends posts and be able to identify parks via QR codes
+> Allow users to get a feed from their friends posts and be able to identify parks via QR codes
 ## Participants
 Damian Bhatia, Salik Chodhary, Rahul Doguparty, Jameson Joseph, Vigaash Sivasothy
