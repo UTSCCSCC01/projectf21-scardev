@@ -18,10 +18,8 @@ const Landing = () => {
 
             <div className={styles.rightContainer}>
                 <h1 className={styles.title}>OpenRun</h1>
-                <Link to="/signup" className={styles.signUpBtn}>
-                    Get Started
-                </Link>
-                <h6 className={styles.subText}>Already have an account? <a className={styles.signInLink} href="#">Sign in</a></h6>
+                <Link to="/signup" className={styles.signUpBtn}>Get Started</Link>
+                <h6 className={styles.subText}>Already have an account? <Link to="/login" className={styles.signInLink}>Sign in</Link></h6>
             </div>
         </div>
     )
