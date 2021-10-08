@@ -1,4 +1,4 @@
-#Release Goal
+##Release Goal
 The goal of OpenRun is to provide a web based application which allows users to organize basketball games at their local parks on an user friendly platform. Our project takes inspiration from the concept of an “open run”. It’s a basketball term which is used to describe pickup basketball games where anyone is able to create teams in order to play against other teams. That is, we’re building an app that’ll allow people to connect to each other in order to play against one another. We aim to allow users to create/join teams, organize game times and connect with other local basketball players. Our platform allows to build a community of athletes who share a common passion for the game of basketball!
 
 Scope
