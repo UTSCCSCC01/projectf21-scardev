@@ -1,32 +1,24 @@
-import { useEffect, useState } from 'react'
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-function App() {
-  const [dat, setDat] = useState("")
-  useEffect(() => {
-    fetch("http://localhost:8081/test")
-      .then(res => res.text().then(t => setDat(t)))
-  }, [])
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import Landing from './pages/Landing'
+import SignUp from './pages/SignUp'
+import Home from './pages/Home'
+import SignIn from './pages/SignIn'
+
+const App = () => {
   return (
-
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {dat === "" ? "requesting data" : dat}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Landing} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/home" component={Home} /> 
+        <Route path="/login" component={SignIn} />
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App
