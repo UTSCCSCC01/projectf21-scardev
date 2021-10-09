@@ -6,11 +6,13 @@ import feed from './Feed.png'
 import maps from './Maps.png'
 import messages from './Messages.png'
 import profile from './Profile.png'
-
+// Component for the navigation bar, consisting of button to return to homepage, searchbar, and other buttons
 const NavigationBar = ()=>{
     return (
       <>
+      {/* Background for navigation bar */}
        <Navbar className="bg-white main-navigation" expand="lg">
+         {/* Image and link for homepage button */}
         <Navbar.Brand href="#home"><img alt=""
                               src={image}
                               width="110"
@@ -20,6 +22,7 @@ const NavigationBar = ()=>{
                               </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
+          {/* Search bar section */}
           <Form className="d-flex">
             <FormControl
               type="search"
@@ -28,44 +31,50 @@ const NavigationBar = ()=>{
               aria-label="Search"
             />
           </Form>
+          {/* Section for links on navigation bar */}
           <Nav
             className="ms-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
             >
-            <Nav.Link href="#action1"><img alt=""
+              {/* Image for feed button  */}
+            <Nav.Link href="#feed"><img alt=""
                               src={feed}
                               crop="fill"
                               height="17"
                               width="19"
                               />{' '}
                               </Nav.Link>
-            <Nav.Link href="#action2"><img alt=""
+            {/* Image for maps button */}
+            <Nav.Link href="#maps"><img alt=""
                               src={maps}
                               crop="fill"
                               height="20"
                               width="18"
                               />{' '}
                               </Nav.Link>
-            <Nav.Link href="#action2"><img alt=""
+            {/* Image for messages button */}
+            <Nav.Link href="#messages"><img alt=""
                               src={messages}
                               crop="fill"
                               height="18"
                               width="18"
                               />{' '}
                               </Nav.Link>
-            <Nav.Link href="#action3"><img alt=""
+              {/* Image for profile button */}
+            <Nav.Link href="#profile"><img alt=""
                               src={profile}
                               crop="fill"
                               height="30"
                               width="30"
                               />{' '}
                               </Nav.Link>
+            {/* Temporary dropdown button  */}
             <NavDropdown   id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+              <NavDropdown.Item href="#matchhistory">Match History</NavDropdown.Item>
+              <NavDropdown.Item href="#courts">Courts</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
+              <NavDropdown.Item href="#sections">Sections</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

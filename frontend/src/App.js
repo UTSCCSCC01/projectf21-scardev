@@ -4,7 +4,7 @@ import NavigationBar from './Components/NavigationBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProfileBar from './Components/ProfileTab';
 import ProfileActivity from './Components/ProfileActivity'
-
+// This is where the navigation bar and profile page are being rendered
 function App() {
   const [dat, setDat] = useState("")
   useEffect(() => {

@@ -42,4 +42,5 @@
   width: 100%;
   position: fixed;
   background: #fbfbfb;
+  overflow: scroll;
 }
