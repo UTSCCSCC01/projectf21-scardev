@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.image {
+    display: flex;
+    flex: 2;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.leftContainer {
+    background-image: url('../../assets/landingPageBasketball.png');
+    background-size: cover;
+    display: flex;
+    flex: 2;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+}
+
+.slogan {
+    font-size: 5.5vw;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: white;
+    width: 95%;
+    margin-left: 5%;
+}
+
+.rightContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-family: 'Text Me One';
+    color: #61D77B;
+    font-size: 72px;
+    margin-bottom: 4%;
+}
+
+.signUpBtn {
+    background-color: #61D77B;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    width: 200px;
+    margin-bottom: 4%;
+    padding: 1% 2% 1% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+
+.signUpBtn:hover {
+    background-color: #4fc568;
+    transform: scale(1.05);
+    color: white;
+}
+
+.subText {
+    font-family: 'Roboto';
+    font-size: 14px;
+}
+
+.signInLink {
+    color: #61D77B;
+    text-decoration: none;
+}
+
+.signInLink:hover {
+    color: #4fc568;
+    text-decoration: underline;
+}
