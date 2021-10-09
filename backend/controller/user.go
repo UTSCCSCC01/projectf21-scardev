@@ -87,6 +87,7 @@ func (u *UserController) Signup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user.Password = &hp
+	user.IsFreeAgent = false
 
 	_, exists := user.IsExisting()
 	if exists {
@@ -134,4 +135,29 @@ func (u *UserController) Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	helpers.SendResponse(helpers.Success, s, http.StatusOK, w)
+}
+
+func (u *UserController) UpdateFreeAgentStatus(w http.ResponseWriter, r *http.Request) {
+	user, err := initUser(r)
+
+	if err != nil {
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
+		return
+	}
+
+	_, exists := user.IsExisting()
+
+	if !exists {
+		helpers.SendResponse(helpers.Error, "user does not exist with given email", http.StatusNotFound, w)
+		return
+	}
+
+	err = user.SetFreeAgent()
+
+	if err != nil {
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
+		return
+	}
+
+	helpers.SendResponse(helpers.Success, "", http.StatusNoContent, w)
 }
