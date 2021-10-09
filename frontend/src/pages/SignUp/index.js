@@ -32,12 +32,16 @@ const SignUp = () => {
             body: JSON.stringify(payload)
         })
         .then(res => {
+<<<<<<< HEAD
             if (res.status == 200){
                 res.json().then(body => {
                     history.push('/login')
                     return
                 })
             }
+=======
+            history.push('/home');
+>>>>>>> Scar 01 (#1)
         })
     }
 
