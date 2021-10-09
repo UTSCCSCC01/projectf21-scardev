@@ -1,0 +1,110 @@
+.title {
+    font-family: 'Text Me One';
+    color: #61D77B;
+    font-size: 72px;
+    text-align: center;
+    margin-bottom: 4%;
+}
+
+input, label {
+    display:block;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formName {
+    display: flex;
+}
+
+.firstName {
+    margin-right: 20px;
+}
+
+.submit {
+    background-color: #61D77B;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 2% 2% 2% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+
+.submit:hover {
+    background-color: #4fc568;
+    transform: scale(1.05);
+    color: white;
+}
+
+.submitContainer {
+    margin-top: 2%;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.inputLong {
+    margin-bottom: 2%;
+}
+
+.leftContainer {
+    background-image: url('../../assets/landingPageBasketball.png');
+    background-size: cover;
+    display: flex;
+    flex: 2;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+}
+
+.slogan {
+    font-size: 5.5vw;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: white;
+    width: 95%;
+    margin-left: 5%;
+}
+
+.rightContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.subText {
+    font-family: 'Roboto';
+    font-size: 14px;
+}
+
+.signInLink {
+    color: #61D77B;
+    text-decoration: none;
+}
+
+.signInLink:hover {
+    color: #4fc568;
+    text-decoration: underline;
+}
+
+.signIn {
+    margin-top: 5%;
+    text-align: center;
+}

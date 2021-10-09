@@ -1,23 +1,24 @@
-import { useEffect, useState } from 'react'
-import './App.css';
-import NavigationBar from './Components/NavigationBar';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ProfileBar from './Components/ProfileTab';
-import ProfileActivity from './Components/ProfileActivity'
-// This is where the navigation bar and profile page are being rendered
-function App() {
-  const [dat, setDat] = useState("")
-  useEffect(() => {
-    fetch("http://localhost:8081/test")
-      .then(res => res.text().then(t => setDat(t)))
-  }, [])
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import Landing from './pages/Landing'
+import SignUp from './pages/SignUp'
+import Home from './pages/Home'
+import SignIn from './pages/SignIn'
+
+const App = () => {
   return (
-    <div className="Background">
-      <NavigationBar/>
-      <ProfileBar />
-      <ProfileActivity />
-      </div>
-  );
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Landing} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/home" component={Home} /> 
+        <Route path="/login" component={SignIn} />
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App
