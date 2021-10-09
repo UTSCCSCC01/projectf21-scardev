@@ -32,7 +32,13 @@ const SignUp = () => {
             body: JSON.stringify(payload)
         })
         .then(res => {
-            history.push('/home');
+            if (res.status == 200){
+                res.json().then(body => {
+                    localStorage.setItem('userToken', body.data)
+                    history.push('/home')
+                    return
+                })
+            }
         })
     }
 
