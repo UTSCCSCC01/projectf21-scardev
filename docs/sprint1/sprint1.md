@@ -17,7 +17,7 @@ The goal of this sprint is to lay the foundation for how our team will work in f
 > SCAR - 1: Rahul, Jameson, Vigaash, Damian, Salik<br />
 > SCAR - 2: Rahul, Salik <br />
 > SCAR - 5: Jameson, Salik <br />
-> SCAR - 7: Rahul, Salik <br />
+> SCAR - 7: Rahul, Salik, Damian <br />
 > SCAR - 10: Damian <br />
 
 ## Participants
