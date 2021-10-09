@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.Background {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: #fbfbfb;
+}
