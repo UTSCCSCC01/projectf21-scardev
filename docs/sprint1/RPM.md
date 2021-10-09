@@ -12,4 +12,4 @@ Our release goals for each sprint are indicated below
 ### Sprint 4
 > Allow users to get a feed from their friends posts and be able to identify parks via QR codes (User stories: SCAR-11, SCAR-16, SCAR-18, SCAR-20)
 ## Participants
-Damian Bhatia, Salik Chodhary, Rahul Doguparty, Jameson Joseph, Vigaash Sivasothy (User stories: SCAR-01, SCAR-02, SCAR-05, SCAR-07, SCAR-10)
+Damian Bhatia, Salik Chodhary, Rahul Doguparty, Jameson Joseph, Vigaash Sivasothy
