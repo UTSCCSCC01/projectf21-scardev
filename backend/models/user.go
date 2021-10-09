@@ -12,9 +12,10 @@ type User struct {
 	ID primitive.ObjectID `bson:"_id"`
 	FirstName *string `json:"first_name" validate:"max=100"`
 	LastName *string `json:"last_name" validate:"max=100"`
-	Password *string `validate:"required"`
-	Email *string `validate:"required"`
-	Phone *string 
+	Password *string `json:"password" validate:"required"`
+	Email *string `json:"email" validate:"required"`
+	Phone *string `json:"phone"` 
+	IsFreeAgent bool `json:"is_free_agent"`
 	// UserId string `json:"user_id"`
 }
 
@@ -60,4 +61,23 @@ func (u *User)Insert() ([]byte, error) {
 	idAsBytes := oid[:]
 
 	return idAsBytes, nil
+}
+
+func (u *User) SetFreeAgent() error {
+	dbInstance, err := db.GetDatabase()
+
+	if err != nil {
+		return err
+	}
+	collection, err := dbInstance.OpenCollection("Users")
+
+	if err != nil {
+		return err
+	}
+
+	filter := bson.D{{Key: "email", Value: u.Email}}
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "isfreeagent", Value: u.IsFreeAgent}}}}
+	_, err = collection.UpdateOne(context.TODO(), filter, update)
+
+	return err
 }

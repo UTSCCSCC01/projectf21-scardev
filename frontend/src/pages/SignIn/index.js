@@ -28,15 +28,17 @@ const SignIn = () => {
         })
         .then(res => {
             if (res.status == 200){
-                history.push('/home');
-                return
+                res.json().then(body => {
+                    localStorage.setItem('userToken', body.data)
+                    history.push('/home')
+                    return
+                })
             }
             
             if (res.status == 401) 
                 setError("Invalid login, try again.")
             else
-                setError("Login request failed, please try again.")
-                
+                setError("Login request failed, please try again.") 
         })
     }
 
@@ -57,9 +59,10 @@ const SignIn = () => {
 
                 {err !== "" && (
                     <div className={styles.signIn}>
-                        <h6 className={styles.subText}>{err}</h6>
+                        <h6 style={{color: 'red', fontSize: 12}}>{err}</h6>
                     </div>
                 )}
+                
                 <div className={styles.submitContainer}>
                     <input type="submit" value="Login" className={styles.submit}/>
                 </div>
