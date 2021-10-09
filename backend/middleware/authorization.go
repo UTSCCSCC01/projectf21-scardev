@@ -10,20 +10,21 @@ import (
 )
 
 var secretKey = []byte(os.Getenv("SECRET_KEY"))
+
 func getTokenString(r *http.Request) (string, bool) {
-	ts, in := r.Header["Authorization"] 
+	ts, in := r.Header["Authorization"]
 
 	if !in {
 		return "", false
 	}
-	
+
 	return ts[0], true
 }
 
 func getTokenFromString(tokenString string) (*jwt.Token, bool) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-				return nil, errors.New("unable to parse jwt token")
+			return nil, errors.New("unable to parse jwt token")
 		}
 		return secretKey, nil
 	})
@@ -44,11 +45,11 @@ func getClaimsMapFromToken(tokenString string) (jwt.MapClaims, bool) {
 
 	m, validClaims := token.Claims.(jwt.MapClaims)
 	validToken := token.Valid
-	
+
 	if !validClaims || !validToken {
 		return nil, false
 	}
-	
+
 	return m, true
 }
 

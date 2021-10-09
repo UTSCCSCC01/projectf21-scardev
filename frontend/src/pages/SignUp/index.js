@@ -34,8 +34,7 @@ const SignUp = () => {
         .then(res => {
             if (res.status == 200){
                 res.json().then(body => {
-                    localStorage.setItem('userToken', body.data)
-                    history.push('/home')
+                    history.push('/login')
                     return
                 })
             }

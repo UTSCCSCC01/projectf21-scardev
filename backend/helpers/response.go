@@ -13,10 +13,10 @@ const (
 	Success
 )
 
-type response struct{
-	Success bool `json:"success"`
-	Error interface{} `json:"error,omitempty"`
-	Data interface{} `json:"data,omitempty"`
+type response struct {
+	Success bool        `json:"success"`
+	Error   interface{} `json:"error,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
 }
 
 func SendResponse(rt ResponseType, message interface{}, code int, w http.ResponseWriter) {
@@ -24,7 +24,7 @@ func SendResponse(rt ResponseType, message interface{}, code int, w http.Respons
 
 	res.Success = rt == Success
 
-	if rt == Success { 
+	if rt == Success {
 		res.Data = message
 	} else if rt == Error {
 		res.Error = message
@@ -33,8 +33,7 @@ func SendResponse(rt ResponseType, message interface{}, code int, w http.Respons
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(code)
-	
-	
+
 	j, _ := json.Marshal(res)
 
 	fmt.Fprintf(w, "%v", string(j))
