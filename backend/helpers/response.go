@@ -32,8 +32,7 @@ func SendResponse(rt ResponseType, message interface{}, code int, w http.Respons
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
-	
-	
+
 	j, _ := json.Marshal(res)
 
 	fmt.Fprintf(w, "%v", string(j))
