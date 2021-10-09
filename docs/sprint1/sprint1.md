@@ -14,10 +14,10 @@ The goal of this sprint is to lay the foundation for how our team will work in f
 > Sprint1.md: Vigaash <br />
 > RPM.md: Vigaash  <br />
 > System Design Document: Rahul, Jameson, Vigaash <br />
-> SCAR - 1: Rahul, Jameson, Vigaash, Damian <br />
-> SCAR - 2: Rahul <br />
-> SCAR - 5: Jameson <br />
-> SCAR - 7: Rahul <br />
+> SCAR - 1: Rahul, Jameson, Vigaash, Damian, Salik<br />
+> SCAR - 2: Rahul, Salik <br />
+> SCAR - 5: Jameson, Salik <br />
+> SCAR - 7: Rahul, Salik <br />
 > SCAR - 10: Damian <br />
 
 ## Participants
