@@ -59,7 +59,7 @@ const Home = () => {
             </form>
 
             <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
+                Add new game
             </Button>
 
             <AddScore show={show} handleClose={handleClose} />
