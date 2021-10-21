@@ -1,5 +1,7 @@
 import { React, useState } from 'react'
 import jwt_decode from 'jwt-decode'
+import AddScore from '../AddScore'
+import { Button } from 'react-bootstrap'
 
 /**
  * Home Page. This is the main feed page.
@@ -9,6 +11,12 @@ const Home = () => {
 
     const userToken = localStorage.getItem('userToken')
     const [agentStatus, setAgentStatus] = useState(true);
+
+    // Show or hide modal
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,7 +43,7 @@ const Home = () => {
             if(res.status === 204) {
                 return
             }
-        })
+        }).catch(err => console.log(err))
     }
 
     return (
@@ -49,6 +57,12 @@ const Home = () => {
                 </select>
                 <input type="submit" value="Save" />
             </form>
+
+            <Button variant="primary" onClick={handleShow}>
+                Launch demo modal
+            </Button>
+
+            <AddScore show={show} handleClose={handleClose} />
         </div>
     )
 }

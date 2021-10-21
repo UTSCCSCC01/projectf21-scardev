@@ -32,7 +32,7 @@ const SignUp = () => {
             body: JSON.stringify(payload)
         })
         .then(res => {
-            if (res.status == 200){
+            if (res.status === 200){
                 res.json().then(body => {
                     history.push('/login')
                     return
