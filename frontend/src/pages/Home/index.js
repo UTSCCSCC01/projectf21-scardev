@@ -1,5 +1,5 @@
-import { React, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { React, useState, useEffect } from 'react'
+import { Button, ListGroup } from 'react-bootstrap'
 
 import jwt_decode from 'jwt-decode'
 
@@ -25,24 +25,28 @@ const Home = () => {
     // Show or hide verify game modal
     const [showVerify, setShowVerify] = useState(false)
     const handleCloseVerify = () => setShowVerify(false)
-    const handleShowVerfiy = () => setShowVerify(true)
+    const handleShowVerify = (game) => {
+        setGameToShow(game)
+        setShowVerify(true)
+    }
+    const [gameToShow, setGameToShow] = useState(null)
 
     // Show or hide toast message
-    const [showToast, setShowToast] = useState(true)
-    const toggleShow = () => setShowToast(!showToast)
+    // const [showToast, setShowToast] = useState(true)
+    // const toggleShow = () => setShowToast(!showToast)
+
+    const [userGames, setUserGames] = useState([])
+    const decoded = jwt_decode(userToken)
+    const email = decoded.sub
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-        let decoded = jwt_decode(userToken)
-        let email = decoded.sub
 
         let payload = {
             email: email,
             is_free_agent: agentStatus
         }
 
-        //TODO: figure out
         const myHeaders = new Headers()
 
         myHeaders.append('Authorization', userToken)
@@ -59,10 +63,31 @@ const Home = () => {
         }).catch(err => console.log(err))
     }
 
+
+    const handleGetGames = async () => {
+        fetch('http://localhost:5000/api/v1/games/get?email=' + email, {
+            method: 'GET',
+        })
+        .then(res => {
+            if(res.status === 200) {
+                res.json().then(body => {
+                    setUserGames(body.data)
+                })
+            }
+        }).catch(err => console.log(err))
+    }
+
+
+    useEffect(() => {
+        handleGetGames()
+    }, [])
+
+
     return (
         <div>        
-            <h1>Hello, user {userToken}</h1>
+            <h1>Hello, {email}</h1>
             <h2>Agent Status: {agentStatus}</h2>
+
             <form onSubmit={handleSubmit}>
                 <select name="choice" onChange={(e) => setAgentStatus(e.target.value)}>
                     <option value={true}>Free Agent</option>
@@ -77,13 +102,27 @@ const Home = () => {
 
             <AddScore show={show} handleClose={handleClose} />
 
-            <Button variant="warning" onClick={handleShowVerfiy} >
-                Verify game
-            </Button>
+            {gameToShow && <VerifyScoreModal show={showVerify} handleClose={handleCloseVerify} game={gameToShow} />}
 
-            <VerifyScoreModal show={showVerify} handleClose={handleCloseVerify} />
+            {/* <ToastMessage show={showToast} toggle={toggleShow} /> */}
 
-            <ToastMessage show={showToast} toggle={toggleShow} />
+            <ListGroup>
+                {
+                    userGames.map(game => {
+                        return (
+                            <ListGroup.Item key={game}>
+                                <div className="ms-2 me-auto">
+                                <div className="fw-bold">{game.location}</div>
+                                    {game.date}
+                                </div>
+                                <Button variant="warning" onClick={() => handleShowVerify(game)} >
+                                    Verify
+                                </Button>
+                            </ListGroup.Item>
+                        )
+                    })
+                }
+            </ListGroup>          
         </div>
     )
 }

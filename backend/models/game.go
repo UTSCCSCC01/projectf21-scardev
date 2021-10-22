@@ -16,9 +16,10 @@ type Game struct {
 	OppScore   int                `json:"opp_score"`
 	Players    []string           `json:"players"`
 	OppPlayers []string           `json:"opp_players"`
+	Approved   bool               `json:"approved"`
 }
 
-func (g *Game) Insert() ([]byte, error) {
+func (g *Game) Insert() (*string, error) {
 
 	dbInstance, err := db.GetDatabase()
 
@@ -38,8 +39,8 @@ func (g *Game) Insert() ([]byte, error) {
 		return nil, err
 	}
 
-	oid := res.InsertedID.(primitive.ObjectID)
-	idAsBytes := oid[:]
+	oid := res.InsertedID.(primitive.ObjectID).Hex()
+	//idAsBytes := oid[:]
 
-	return idAsBytes, nil
+	return &oid, nil
 }

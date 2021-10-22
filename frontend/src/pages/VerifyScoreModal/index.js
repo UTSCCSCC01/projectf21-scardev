@@ -1,19 +1,49 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { Button, Form, Modal, InputGroup, FormControl, Tabs, Tab, ListGroup } from 'react-bootstrap'
 
 import styles from './index.module.css'
 
-const VerifyScoreModal = ({show, handleClose}) => {
+import jwt_decode from 'jwt-decode'
+
+
+const VerifyScoreModal = ({show, handleClose, game}) => {
 
     // 0 = reject, 1 = approved
     const [approvalState, setApprovalState] = useState(0)
     const [comment, setComment] = useState("")
+
+    const userToken = localStorage.getItem('userToken')
+
+    const [team, setTeam] = useState("")
+    const [status, setStatus] = useState("")
+
+    const getTeam = () => {
+        let email = jwt_decode(userToken).sub
+        if (game.players.includes(email) || email === game.created_by) {
+            setTeam("player")
+        } else {
+            setTeam("opponent")
+        }
+    }
+
+    const getStatus = () => {
+        getTeam()
+        if (team === "player" && game.score > game.opp_score || team === "opponent" && game.score < game.opp_score) {
+            setStatus("Win")
+        } else {
+            setStatus("Loss")
+        }
+    }
 
     const handleApprove = () => {
         setApprovalState(1)
         setComment("")
         handleClose()
     }
+
+    useEffect(() => {
+        getStatus()
+    }, [])
 
     return (
         <Modal show={show} onHide={handleClose} scrollable={true} contentClassName={styles.modal}>
@@ -23,23 +53,33 @@ const VerifyScoreModal = ({show, handleClose}) => {
             <Modal.Body>
                 <Form.Group className="mb-3">
                     <Form.Label>
+                        Created By
+                    </Form.Label>
+                    <Form.Control type="text" placeholder={game.created_by} readOnly />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>
                         Location
                     </Form.Label>
-                    <Form.Control type="text" placeholder="Panam Center" readOnly />
+                    <Form.Control type="text" placeholder={game.location} readOnly />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                     <Form.Label>
                         Date
                     </Form.Label>
-                    <Form.Control type="text" placeholder="2021-10-06" readOnly />
+                    <Form.Control type="text" placeholder={game.date} readOnly />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Score: <strong className={styles.loss}>Loss</strong></Form.Label>
+                    {   status === "Win" ?
+                        <Form.Label>Score: <strong className={styles.win}>Win</strong></Form.Label> : 
+                        <Form.Label>Score: <strong className={styles.loss}>Loss</strong></Form.Label>
+                    }
                     <InputGroup className="mb-3">
-                        <Form.Control placeholder="6" readOnly />
-                        <Form.Control placeholder="11" readOnly />
+                        <Form.Control placeholder={game.score} readOnly />
+                        <Form.Control placeholder={game.opp_score} readOnly />
                     </InputGroup>
                 </Form.Group>
 
@@ -47,15 +87,36 @@ const VerifyScoreModal = ({show, handleClose}) => {
                     <Tabs defaultActiveKey="team" className="mb-3">
                         <Tab eventKey="team" title="Your Team" tabClassName={styles.tabColor}>
                             <ListGroup>
-                                <ListGroup.Item>dabhatia</ListGroup.Item>
-                                <ListGroup.Item>schodhary</ListGroup.Item>
-                                <ListGroup.Item>seneca24</ListGroup.Item>
-                                <ListGroup.Item>884499</ListGroup.Item>
+                                {   
+                                    team === "player" ? 
+                                    game.players.map(player => {
+                                        return (
+                                            <ListGroup.Item>{player}</ListGroup.Item>
+                                        )
+                                    })  : 
+                                    game.opp_players.map(player => {
+                                        return (
+                                            <ListGroup.Item>{player}</ListGroup.Item>
+                                        )
+                                    })
+                                }
                             </ListGroup>
                         </Tab>
                         <Tab eventKey="opponent" title="Opponent" tabClassName={styles.tabColor}>
                             <ListGroup>
-                                <ListGroup.Item>jjwavyy</ListGroup.Item>
+                                {
+                                    team === "opponent" ? 
+                                    game.players.map(player => {
+                                        return (
+                                            <ListGroup.Item>{player}</ListGroup.Item>
+                                        )
+                                    })  : 
+                                    game.opp_players.map(player => {
+                                        return (
+                                            <ListGroup.Item>{player}</ListGroup.Item>
+                                        )
+                                    })
+                                }
                             </ListGroup>
                         </Tab>
                     </Tabs>

@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from 'react'
 import { Modal, Button, Form, InputGroup, FormControl, Tabs, Tab, Badge, CloseButton } from 'react-bootstrap'
 
+import jwt_decode from 'jwt-decode'
+
 import styles from './index.module.css'
 
 /**
@@ -24,16 +26,15 @@ const AddScore = ({show, handleClose}) => {
 
     const handleSubmit = () => {
         const payload = {
-            created_by: "damian",
+            created_by: jwt_decode(localStorage.getItem("userToken")).sub,
             location: location,
             date: date,
             score: parseInt(score),
             opp_score: parseInt(oppScore),
             players: yourTeam,
-            opp_players: oppTeam
+            opp_players: oppTeam,
+            approved: false
         }
-
-        console.log(payload)
 
         fetch('http://localhost:5000/api/v1/games/create', {
             method: 'post',
@@ -101,9 +102,14 @@ const AddScore = ({show, handleClose}) => {
         setCurrTab(currTab ? 0 : 1)
     }
 
+    const handleWindowClose = () => {
+        resetFormVariables()
+        handleClose()
+    }
+
     return (
         <>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleWindowClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add new game</Modal.Title>
                 </Modal.Header>
