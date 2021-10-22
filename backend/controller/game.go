@@ -32,6 +32,17 @@ func initGame(r *http.Request) (*models.Game, error) {
 	return game, nil
 }
 
+func getGame(r *http.Request) (*models.Game, error) {
+	game := &models.Game{}
+	err := json.NewDecoder(r.Body).Decode(game)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return game, nil
+}
+
 /** Retrieve user by email from mongodb **/
 func getUserByEmail(email *string) (*models.User, error) {
 	dbInstance, err := db.GetDatabase()
@@ -134,4 +145,36 @@ func (g *GameController) GetGames(w http.ResponseWriter, r *http.Request) {
 	}
 
 	helpers.SendResponse(helpers.Success, games, http.StatusOK, w)
+}
+
+/** Route to approve game **/
+func (g *GameController) Approve(w http.ResponseWriter, r *http.Request) {
+	type temp struct {
+		ID string `json:"_id"`
+	}
+
+	ty := &temp{}
+	err := json.NewDecoder(r.Body).Decode(ty)
+
+	if err != nil {
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
+		return
+	}
+
+	game := &models.Game{}
+	game.ID, err = primitive.ObjectIDFromHex(ty.ID)
+
+	if err != nil {
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusInternalServerError, w)
+		return
+	}
+
+	err = game.Approve()
+
+	if err != nil {
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusInternalServerError, w)
+		return
+	}
+
+	helpers.SendResponse(helpers.Success, "", http.StatusNoContent, w)
 }

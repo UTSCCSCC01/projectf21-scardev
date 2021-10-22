@@ -4,6 +4,7 @@ import (
 	"context"
 	"openrun/db"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -43,4 +44,23 @@ func (g *Game) Insert() (*string, error) {
 	//idAsBytes := oid[:]
 
 	return &oid, nil
+}
+
+func (g *Game) Approve() error {
+	dbInstance, err := db.GetDatabase()
+
+	if err != nil {
+		return err
+	}
+	collection, err := dbInstance.OpenCollection("Games")
+
+	if err != nil {
+		return err
+	}
+
+	filter := bson.D{{Key: "_id", Value: g.ID}}
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "approved", Value: true}}}}
+	_, err = collection.UpdateOne(context.TODO(), filter, update)
+
+	return err
 }

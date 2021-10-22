@@ -5,7 +5,6 @@ import jwt_decode from 'jwt-decode'
 
 import AddScore from '../AddScore'
 import VerifyScoreModal from '../VerifyScoreModal'
-import ToastMessage from '../ToastMessage'
 
 /**
  * Home Page. This is the main feed page.
@@ -18,7 +17,6 @@ const Home = () => {
 
     // Show or hide create game modal
     const [show, setShow] = useState(false)
-
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
@@ -31,11 +29,8 @@ const Home = () => {
     }
     const [gameToShow, setGameToShow] = useState(null)
 
-    // Show or hide toast message
-    // const [showToast, setShowToast] = useState(true)
-    // const toggleShow = () => setShowToast(!showToast)
-
     const [userGames, setUserGames] = useState([])
+
     const decoded = jwt_decode(userToken)
     const email = decoded.sub
 
@@ -80,7 +75,7 @@ const Home = () => {
 
     useEffect(() => {
         handleGetGames()
-    }, [])
+    }, [userGames])
 
 
     return (
@@ -105,15 +100,48 @@ const Home = () => {
             {gameToShow && <VerifyScoreModal show={showVerify} handleClose={handleCloseVerify} game={gameToShow} />}
 
             {/* <ToastMessage show={showToast} toggle={toggleShow} /> */}
+  
+            <ListGroup>
+                <div className="fw-bold">Games created by you</div>
+                {
+                    userGames.reverse().map(game => {
+                        if (game.created_by === email) {
+                            return (
+                                <ListGroup.Item key={game.ID}>
+                                    <div className="ms-2 me-auto">
+                                    <div className="fw-bold">Location: {game.location}</div>
+                                        Date: {game.date}
+                                        <br/>
+                                        Game ID: {game.ID}
+                                    </div>
+                                    {
+                                        game.approved === true ? 
+                                        <Button variant="success" disabled>Approved!</Button> :
+                                        <Button variant="dark" disabled>Awaiting approval...</Button>
+                                    }
+                                    
+                                </ListGroup.Item>
+                            )
+                        }
+                    })
+                }
+            </ListGroup> 
 
             <ListGroup>
+                <div className="fw-bold">Games requesting your approval</div>
                 {
                     userGames.map(game => {
+                        if (game.approved !== false || game.created_by === email) {
+                            return null;
+                        }
+
                         return (
-                            <ListGroup.Item key={game}>
+                            <ListGroup.Item key={game.ID}>
                                 <div className="ms-2 me-auto">
-                                <div className="fw-bold">{game.location}</div>
-                                    {game.date}
+                                <div className="fw-bold">Location: {game.location}</div>
+                                    Date: {game.date}
+                                    <br/>
+                                    Game ID: {game.ID}
                                 </div>
                                 <Button variant="warning" onClick={() => handleShowVerify(game)} >
                                     Verify
