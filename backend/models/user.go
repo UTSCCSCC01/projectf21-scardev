@@ -9,13 +9,13 @@ import (
 )
 
 type User struct {
-	ID primitive.ObjectID `bson:"_id"`
-	FirstName *string `json:"first_name" validate:"max=100"`
-	LastName *string `json:"last_name" validate:"max=100"`
-	Password *string `json:"password" validate:"required"`
-	Email *string `json:"email" validate:"required"`
-	Phone *string `json:"phone"` 
-	IsFreeAgent bool `json:"is_free_agent"`
+	ID          primitive.ObjectID `bson:"_id"`
+	FirstName   *string            `json:"first_name" validate:"max=100"`
+	LastName    *string            `json:"last_name" validate:"max=100"`
+	Password    *string            `json:"password" validate:"required"`
+	Email       *string            `json:"email" validate:"required"`
+	Phone       *string            `json:"phone"`
+	IsFreeAgent bool               `json:"is_free_agent"`
 	// UserId string `json:"user_id"`
 }
 
@@ -32,15 +32,15 @@ func (u *User) IsExisting() (*User, bool) {
 
 	if err != nil {
 		return nil, false
-		
+
 	}
 	err = collection.FindOne(context.TODO(), filter).Decode(res)
 
 	return res, err == nil
 }
 
-func (u *User)Insert() ([]byte, error) {
-	
+func (u *User) Insert() ([]byte, error) {
+
 	dbInstance, err := db.GetDatabase()
 
 	if err != nil {
