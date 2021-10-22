@@ -45,6 +45,11 @@ const AddScore = ({show, handleClose}) => {
         } 
     }
 
+    /**
+     * Specified player is removed from the appropriate list 
+     * based on the current tab.
+     * @param e the event trigger by pressing close button
+     */
     const removePlayer = (e) => {
         if (currTab === 0) {
             setYourTeam(yourTeam.filter(player => player != e.target.value))
@@ -53,6 +58,9 @@ const AddScore = ({show, handleClose}) => {
         }
     }
 
+    /**
+     * Handle the switching between the Your Team and Opponent tab.
+     */
     const handleSwitchTabs = () => {
         setNewPlayer("")
         setCurrTab(currTab ? 0 : 1)

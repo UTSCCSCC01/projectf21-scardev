@@ -1,0 +1,15 @@
+.loss {
+    color: red;
+}
+
+.modal {
+    height: 550px;
+}
+
+.tabColor {
+    color: #4fc568;
+}
+
+.tabColor:hover {
+    color: #61D77B;
+}
