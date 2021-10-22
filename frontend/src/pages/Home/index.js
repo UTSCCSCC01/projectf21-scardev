@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode'
 
 import AddScore from '../AddScore'
 import VerifyScoreModal from '../VerifyScoreModal'
+import NavigationBar from '../../Components/NavigationBar'
 
 /**
  * Home Page. This is the main feed page.
@@ -80,6 +81,7 @@ const Home = () => {
 
     return (
         <div>        
+            <NavigationBar />
             <h1>Hello, {email}</h1>
             <h2>Agent Status: {agentStatus}</h2>
 

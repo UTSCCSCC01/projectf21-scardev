@@ -6,8 +6,9 @@ import feed from './Feed.png'
 import maps from './Maps.png'
 import messages from './Messages.png'
 import profile from './Profile.png'
+
 // Component for the navigation bar, consisting of button to return to homepage, searchbar, and other buttons
-const NavigationBar = ()=>{
+const NavigationBar = () => {
     return (
       <>
       {/* Background for navigation bar */}
