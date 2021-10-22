@@ -16,7 +16,7 @@ Complete user stories SCAR-2, SCAR-5, SCAR-8, SCAR-9 and SCAR-10, SCAR-12, SCAR-
 > Documentation: Everyone <br />
 > Sprint1.md: Vigaash, Rahul <br />
 > RPM.md: Vigaash, Rahul  <br />
-> System Design Document: Vigaash, Rahul <br />
+> System Design Document: Vigaash, Rahul, Jameson <br />
 > SCAR - 2: Jameson<br />
 > SCAR - 5: Salik<br />
 > SCAR - 8: Damian<br />
