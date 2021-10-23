@@ -12,8 +12,8 @@ import styles from './index.module.css'
  * @returns AddScore Modal
  */
 const AddScore = ({show, handleClose}) => {
-    const userToken = localStorage.getItem('userToken')
 
+    const userToken = localStorage.getItem('userToken')
 
     const [location, setLocation] = useState("")
     const [date, setDate] = useState("")
@@ -38,8 +38,6 @@ const AddScore = ({show, handleClose}) => {
             opp_players: oppTeam,
             approved: false
         }
-
-        console.log(payload)
 
         fetch('http://localhost:5000/api/v1/games/create', {
             method: 'post',
@@ -69,7 +67,6 @@ const AddScore = ({show, handleClose}) => {
         setOppTeam([])
         setCurrTab(0)
     }
-
 
     /**
      * If enter key was pressed then add the player to the 

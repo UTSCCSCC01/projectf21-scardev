@@ -8,6 +8,7 @@ import feed from '../assets/Feed.png'
 import maps from '../assets/Maps.png'
 import messages from '../assets/Messages.png'
 import profile from '../assets/Profile.png'
+
 // Component for the navigation bar, consisting of button to return to homepage, searchbar, and other buttons
 const NavigationBar = () => {
     return (

@@ -11,8 +11,6 @@ import Feed from './pages/Feed'
 import ProfileBar from './Components/ProfileTab.js'
 import NavigationBar from './Components/NavigationBar.js';
  
-// Main entry point to app
-
 import Profile from './pages/Profile'
 
 const App = () => {
