@@ -37,7 +37,10 @@ func InitRoutes(r *mux.Router) {
 		}
 		helpers.SendResponse(helpers.Success, t, 200, w)
 	})
+
 	uc := controller.UserController{}
+	gc := controller.GameController{}
+
 	/*
 			Expects - {
 				first_name: "name"
@@ -92,5 +95,10 @@ func InitRoutes(r *mux.Router) {
 	r.Handle("/api/v1/user/following", middleware.IsJWTAuthorized(uc.Follow)).Methods("POST") //handlefunc or handle
 	//Protect all endpoints using middleware.IsJWTAuthorized
 	//Prefix actual endpoints with /api/v1
+
+	/** Damian's routes - check for bs pls **/
+	r.HandleFunc("/api/v1/games/create", gc.CreateGame).Methods("POST")
+	r.HandleFunc("/api/v1/games/get", gc.GetGames).Methods("GET")
+	r.HandleFunc("/api/v1/games/approve", gc.Approve).Methods("POST")
 	r.Handle("/api/v1/user/getname", middleware.IsJWTAuthorized(uc.GetUserName)).Methods("PUT")
 }

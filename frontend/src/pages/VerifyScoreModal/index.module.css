@@ -2,6 +2,10 @@
     color: red;
 }
 
+.win {
+    color: green;
+}
+
 .modal {
     height: 550px;
 }

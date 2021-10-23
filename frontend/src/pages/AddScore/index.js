@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from 'react'
 import { Modal, Button, Form, InputGroup, FormControl, Tabs, Tab, Badge, CloseButton } from 'react-bootstrap'
 
+import jwt_decode from 'jwt-decode'
+
 import styles from './index.module.css'
 
 /**
@@ -10,6 +12,8 @@ import styles from './index.module.css'
  * @returns AddScore Modal
  */
 const AddScore = ({show, handleClose}) => {
+    const userToken = localStorage.getItem('userToken')
+
 
     const [location, setLocation] = useState("")
     const [date, setDate] = useState("")
@@ -20,14 +24,52 @@ const AddScore = ({show, handleClose}) => {
     const [oppTeam, setOppTeam] = useState([])
     const [currTab, setCurrTab] = useState(0)
 
-    const handleSubmit = () => {
-        console.log(location)
-        console.log(date)
-        console.log(score)
-        console.log(oppScore)
+    const [error, setError] = useState(null)
 
+    const handleSubmit = () => {
+
+        const payload = {
+            created_by: jwt_decode(localStorage.getItem("userToken")).sub,
+            location: location,
+            date: date,
+            score: parseInt(score),
+            opp_score: parseInt(oppScore),
+            players: yourTeam,
+            opp_players: oppTeam,
+            approved: false
+        }
+
+        console.log(payload)
+
+        fetch('http://localhost:5000/api/v1/games/create', {
+            method: 'post',
+            body: JSON.stringify(payload)
+        }).then(res => {
+            if (res.status === 200){
+                res.json().then(body => console.log(body))
+            }
+            
+            if (res.status === 400) 
+                setError("Invalid request body")
+            else if (res.statuse !== 200)
+                setError("Create game request failed, please try again") 
+        })
+
+        resetFormVariables()
         handleClose()
     }
+
+    const resetFormVariables = () => {
+        setLocation("")
+        setDate("")
+        setScore(0)
+        setOppScore(0)
+        setNewPlayer("")
+        setYourTeam([])
+        setOppTeam([])
+        setCurrTab(0)
+    }
+
 
     /**
      * If enter key was pressed then add the player to the 
@@ -66,9 +108,14 @@ const AddScore = ({show, handleClose}) => {
         setCurrTab(currTab ? 0 : 1)
     }
 
+    const handleWindowClose = () => {
+        resetFormVariables()
+        handleClose()
+    }
+
     return (
         <>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleWindowClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add new game</Modal.Title>
                 </Modal.Header>
@@ -141,9 +188,7 @@ const AddScore = ({show, handleClose}) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={handleSubmit} className={styles.submitBtn}>
-                        Add
-                    </Button>
+                    <Button onClick={handleSubmit} className={styles.submitBtn}>Add</Button>
                 </Modal.Footer>
             </Modal>
         </>

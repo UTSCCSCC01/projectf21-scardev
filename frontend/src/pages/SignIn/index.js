@@ -30,7 +30,7 @@ const SignIn = () => {
             if (res.status === 200){
                 res.json().then(body => {
                     localStorage.setItem('userToken', body.data)
-                    history.push('/home')
+                    history.push('/feed')
                     return
                 })
             }
