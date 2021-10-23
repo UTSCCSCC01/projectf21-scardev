@@ -100,6 +100,5 @@ func InitRoutes(r *mux.Router) {
 	r.HandleFunc("/api/v1/games/create", gc.CreateGame).Methods("POST")
 	r.HandleFunc("/api/v1/games/get", gc.GetGames).Methods("GET")
 	r.HandleFunc("/api/v1/games/approve", gc.Approve).Methods("POST")
-
 	r.Handle("/api/v1/user/getname", middleware.IsJWTAuthorized(uc.GetUserName)).Methods("PUT")
 }

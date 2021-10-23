@@ -21,6 +21,10 @@ import AddScore from '../AddScore'
 import VerifyScoreModal from '../VerifyScoreModal'
 import NavigationBar from '../../Components/NavigationBar'
 
+import AddScore from '../AddScore'
+import VerifyScoreModal from '../VerifyScoreModal'
+import NavigationBar from '../../Components/NavigationBar'
+
 /**
  * Home Page. This is the main feed page.
  * @returns Home Page
@@ -39,7 +43,6 @@ const Home = () => {
     // Show or hide verify game modal
     const [showVerify, setShowVerify] = useState(false)
     const handleCloseVerify = () => setShowVerify(false)
-
     const handleShowVerify = (game) => {
         setGameToShow(game)
         setShowVerify(true)
