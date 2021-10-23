@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import avatar from "./Avatar.png"
-import follow from "./FollowButton.png"
+import avatar from "../assets/Avatar.png"
+import follow from "../assets/FollowButton.png"
 import "./ProfileTab.css"
 // Component for the profile bar section of the profile page
 // Consists of the avatar, username, name, followers, following, level, and button for other users to follow
@@ -18,16 +18,16 @@ const ProfileBar = () =>{
                 {/* Top Row section that consists of name and follow button */}
             <Row className="topRow">
                 <Col className="fullname" xs={12} md={8}>Frederich Roundhouse</Col>
-                <Col className="followButton" xs={6} md={8}><img alt=""
+                <Col className="followButton" xs={6} md={8}> {/* <img alt=""
                           className="follow"
                           src={follow}
-                          />
+                          /> */}
                 </Col>
             </Row>
             {/* Middle section that consists of username */}
-            <Row className="middleRow">
-                <Col className="userName">@f_rndhouse</Col>
-            </Row>
+           {/*<Row className="middleRow">
+                              <Col className="userName">@f_rndhouse</Col>
+                          </Row>*/}
             {/* Bottom section that consists followers, following and level */}
             <Row className="bottomRow">
                 <Col>Followers</Col>

@@ -1,5 +1,6 @@
 import { React, useState } from 'react'
 import jwt_decode from 'jwt-decode'
+import NavBar from '../../Components/NavigationBar'
 
 /**
  * Home Page. This is the main feed page.
@@ -39,7 +40,8 @@ const Home = () => {
     }
 
     return (
-        <div>        
+        <div>
+            <NavBar/>
             <h1>Hello, user {userToken}</h1>
             <h2>Agent Status: {agentStatus}</h2>
             <form onSubmit={handleSubmit}>
