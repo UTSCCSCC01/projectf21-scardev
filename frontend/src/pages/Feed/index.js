@@ -206,9 +206,29 @@ const Feed = () => {
                                 if (game.approved === false) {
                                     return null;
                                 }
+                                
+                                let status = ""
+                                if(game.players.includes(email) || email === game.created_by) {
+                                    if (game.score > game.opp_score) {
+                                        status = "win"
+                                    } else {
+                                        status = "loss"
+                                    }
+                                } else if(game.opp_players.includes(email)) {
+                                    if (game.score < game.opp_score) {
+                                        status = "win"
+                                    } else {
+                                        status = "loss"
+                                    }
+                                }
 
                                 return (
                                     <ListGroup.Item key={game.ID}>
+                                        {
+                                            status === "win" ? 
+                                            <Badge bg="success" className={styles.statusBadge}>WIN</Badge> :
+                                            <Badge bg="danger" className={styles.statusBadge}>LOSS</Badge>
+                                        }
                                         <div className="ms-2 me-auto">
                                         <div className="fw-bold">Location: {game.location}</div>
                                                 <strong>Date: </strong>{game.date}
