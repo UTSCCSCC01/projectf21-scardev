@@ -7,6 +7,7 @@ import Landing from './pages/Landing'
 import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
+import Profile from './pages/Profile'
 
 import Profile from './pages/Profile'
 
@@ -21,7 +22,6 @@ const App = () => {
         <Route path="/home" component={Home} /> 
         <Route path="/login" component={SignIn} />
         <Route path="/profile" component={Profile}/>
-
       </Switch>
     </Router>
   )

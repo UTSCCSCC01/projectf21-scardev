@@ -1,4 +1,3 @@
-
 import React, {useEffect, useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import avatar from "../assets/Avatar.png"
@@ -8,6 +7,7 @@ import "./ProfileTab.css"
 // Component for the profile bar section of the profile page
 // Consists of the avatar, username, name, followers, following, level, and button for other users to follow
 const ProfileBar = () =>{
+
         const userToken = localStorage.getItem('userToken')
         const [name, setName] = useState('');
 
@@ -49,6 +49,7 @@ const ProfileBar = () =>{
             <div classsName="info">
                 {/* Top Row section that consists of name and follow button */}
             <Row className="topRow">
+
                 <Col className="fullname" xs={12} md={8}>{name}</Col>
                 <Col className="followButton" xs={6} md={8}> {/* <img alt=""
                           className="follow"
@@ -60,7 +61,6 @@ const ProfileBar = () =>{
            {/*<Row className="middleRow">
                               <Col className="userName">@f_rndhouse</Col>
                           </Row>*/}
-
             {/* Bottom section that consists followers, following and level */}
             <Row className="bottomRow">
                 <Col>Followers</Col>
