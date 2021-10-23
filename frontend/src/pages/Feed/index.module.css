@@ -1,4 +1,8 @@
 
+.nav {
+    position: sticky;
+}
+
 .container {
     height: 100vh;
     background-color: white;
@@ -44,10 +48,8 @@
 .leftContainer {
     background-color: white;
     height: 100vh;
-}
 
 .postDetails {
-    border-bottom: 1px solid #d1d1d1;
 }
 
 .avatar {
@@ -71,6 +73,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1%;
-    border-top: 1px solid #d1d1d1;
+    padding: 0.5%;
 }

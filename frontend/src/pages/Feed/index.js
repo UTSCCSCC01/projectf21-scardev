@@ -11,6 +11,7 @@ import styles from './index.module.css'
 
 import Avatar from '../../Components/Avatar.png'
 import TempPost from '../../Components/templateposts/Temp1.png'
+import TempPost2 from '../../Components/templateposts/Temp2.png'
 
 const Feed = () => {
     const userToken = localStorage.getItem('userToken')
@@ -49,15 +50,15 @@ const Feed = () => {
 
     useEffect(() => {
         handleGetGames()
-    }, [])
+    }, [userGames])
 
     return (
         <Fragment>
-            <NavigationBar />
+            <NavigationBar className={styles.nav}/>
 
             <Container className={styles.container}>
                 <Row className={"justify-content-md-center"}>
-                    <Col xs={8} className={styles.leftContienr}>
+                    <Col xs={8} className={styles.leftContainer}>
                         <ListGroup>
                             <ListGroup.Item>
                                 <Container>
@@ -91,6 +92,38 @@ const Feed = () => {
                                     </Row>
                                 </Container>
                             </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Container>
+                                    <Row className={styles.postDetails}>
+                                        <Col xs={1}>
+                                            <Image src={Avatar} roundedCircle className={styles.avatar}/>                 
+                                        </Col>                   
+                                        <Col xs={9}>
+                                            <div className="fw-bold">Frederich Roundhouse</div>
+                                            <div className={styles.username}>@f_rndhouse</div>
+                                        </Col>
+                                        <Col xs={2} className={styles.time}>
+                                            <div className={styles.username}>5 hours ago</div>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={10} className={styles.post}>
+                                            <Image src={TempPost2}/>                 
+                                        </Col> 
+                                    </Row>
+                                    <Row className={styles.commentContainer}>
+                                        <Col xs={1}>
+                                            <Image src={Avatar} roundedCircle className={styles.avatar}/>                 
+                                        </Col>                   
+                                        <Col xs={2}>
+                                            <div className={styles.username}>@f_rndhouse</div>
+                                        </Col>
+                                        <Col>
+                                            Lorem ipsum dolor sit amet, consectetur
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </ListGroup.Item>
                         </ListGroup>
                     </Col>
                     <Col className={styles.rightContainer}>
@@ -102,7 +135,7 @@ const Feed = () => {
         
                     <ListGroup>
                         <div className={styles.addBtnContainer}>
-                            <div className="fw-bold">Your Games</div>
+                            <div className="fw-bold">Games you submitted</div>
                             <Button className={styles.addBtn} onClick={handleShow} >
                                 New game +
                             </Button>
@@ -137,7 +170,7 @@ const Feed = () => {
 
                     <ListGroup>
                         <div className={styles.addBtnContainer}>
-                            <div className="fw-bold">Require verification</div>
+                            <div className="fw-bold">Games requiring verification</div>
                         </div>
 
                         {
@@ -161,7 +194,51 @@ const Feed = () => {
                                 )
                             })
                         }
-                    </ListGroup>      
+                    </ListGroup>    
+                    <ListGroup>
+                        <div className={styles.addBtnContainer}>
+                            <div className="fw-bold">Game history</div>
+                        </div>
+
+                        {
+                            userGames.map(game => {
+                                if (game.approved === false) {
+                                    return null;
+                                }
+                                
+                                let status = ""
+                                if(game.players.includes(email) || email === game.created_by) {
+                                    if (game.score > game.opp_score) {
+                                        status = "win"
+                                    } else {
+                                        status = "loss"
+                                    }
+                                } else if(game.opp_players.includes(email)) {
+                                    if (game.score < game.opp_score) {
+                                        status = "win"
+                                    } else {
+                                        status = "loss"
+                                    }
+                                }
+
+                                return (
+                                    <ListGroup.Item key={game.ID}>
+                                        {
+                                            status === "win" ? 
+                                            <Badge bg="success" className={styles.statusBadge}>WIN</Badge> :
+                                            <Badge bg="danger" className={styles.statusBadge}>LOSS</Badge>
+                                        }
+                                        <div className="ms-2 me-auto">
+                                        <div className="fw-bold">Location: {game.location}</div>
+                                                <strong>Date: </strong>{game.date}
+                                                <br/>
+                                                <strong>Game ID: </strong>{game.ID}
+                                        </div>
+                                    </ListGroup.Item>
+                                )
+                            })
+                        }
+                    </ListGroup>     
                     </Col>
                 </Row>
             </Container>

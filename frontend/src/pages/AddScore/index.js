@@ -13,6 +13,8 @@ import styles from './index.module.css'
  */
 const AddScore = ({show, handleClose}) => {
 
+    const userToken = localStorage.getItem('userToken')
+
     const [location, setLocation] = useState("")
     const [date, setDate] = useState("")
     const [score, setScore] = useState(0)
@@ -25,6 +27,7 @@ const AddScore = ({show, handleClose}) => {
     const [error, setError] = useState(null)
 
     const handleSubmit = () => {
+
         const payload = {
             created_by: jwt_decode(localStorage.getItem("userToken")).sub,
             location: location,
