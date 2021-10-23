@@ -16,6 +16,8 @@ type User struct {
 	Email *string `json:"email" validate:"required"`
 	Phone *string `json:"phone"` 
 	IsFreeAgent bool `json:"is_free_agent"`
+	Followers []string `json:"followers"`
+	Following []string `json:"following"`
 	// UserId string `json:"user_id"`
 }
 
@@ -77,6 +79,47 @@ func (u *User) SetFreeAgent() error {
 
 	filter := bson.D{{Key: "email", Value: u.Email}}
 	update := bson.D{{Key: "$set", Value: bson.D{{Key: "isfreeagent", Value: u.IsFreeAgent}}}}
+	_, err = collection.UpdateOne(context.TODO(), filter, update)
+
+	return err
+}
+
+
+func (u *User) AddToMyFollowing(email string) error {
+	dbInstance, err := db.GetDatabase()
+
+	if err != nil {
+			return err
+	}
+	collection, err := dbInstance.OpenCollection("Users")
+
+	if err != nil {
+			return err
+	}
+
+	//append to my following
+	filter := bson.D{{Key: "email", Value: u.Email}}
+	update := bson.D{{Key: "$addToSet", Value: bson.D{{Key: "following", Value: email}}}}
+	_, err = collection.UpdateOne(context.TODO(), filter, update)
+
+	return err
+}
+
+func (u *User) AddToOtherPersonsFollowers(email string) error {
+	dbInstance, err := db.GetDatabase()
+
+	if err != nil {
+			return err
+	}
+	collection, err := dbInstance.OpenCollection("Users")
+
+	if err != nil {
+			return err
+	}
+
+	//append to my following
+	filter := bson.D{{Key: "email", Value: email}}
+	update := bson.D{{Key: "$addToSet", Value: bson.D{{Key: "followers", Value: u.Email}}}}
 	_, err = collection.UpdateOne(context.TODO(), filter, update)
 
 	return err
