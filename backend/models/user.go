@@ -17,6 +17,8 @@ type User struct {
 	Phone       *string              `json:"phone"`
 	IsFreeAgent bool                 `json:"is_free_agent"`
 	Games       []primitive.ObjectID `json:"games"`
+	Followers []string `json:"followers"`
+	Following []string `json:"following"`
 	// UserId string `json:"user_id"`
 }
 
@@ -105,8 +107,29 @@ func (u *User) InsertGame(gameId *string) error {
 	filter := bson.D{{Key: "email", Value: u.Email}}
 	update := bson.D{{Key: "$push", Value: bson.D{{Key: "games", Value: objID}}}}
 	_, err = collection.UpdateOne(context.TODO(), filter, update)
+  
+  return err
+}
 
-	return err
+
+func (u *User) AddToMyFollowing(email string) error {
+    dbInstance, err := db.GetDatabase()
+
+    if err != nil {
+            return err
+    }
+    collection, err := dbInstance.OpenCollection("Users")
+
+    if err != nil {
+            return err
+    }
+
+    //append to my following
+    filter := bson.D{{Key: "email", Value: u.Email}}
+    update := bson.D{{Key: "$addToSet", Value: bson.D{{Key: "following", Value: email}}}}
+    _, err = collection.UpdateOne(context.TODO(), filter, update)
+
+    return err
 }
 
 func (u *User) GetGamesList() ([]*Game, error) {
@@ -137,4 +160,24 @@ func (u *User) GetGamesList() ([]*Game, error) {
 	}
 
 	return games, err
+}
+
+  func (u *User) AddToOtherPersonsFollowers(email string) error {
+	dbInstance, err := db.GetDatabase()
+
+	if err != nil {
+			return err
+	}
+	collection, err := dbInstance.OpenCollection("Users")
+
+	if err != nil {
+			return err
+	}
+
+	//append to my following
+	filter := bson.D{{Key: "email", Value: email}}
+	update := bson.D{{Key: "$addToSet", Value: bson.D{{Key: "followers", Value: u.Email}}}}
+	_, err = collection.UpdateOne(context.TODO(), filter, update)
+
+	return err
 }

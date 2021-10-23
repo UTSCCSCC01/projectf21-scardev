@@ -4,6 +4,7 @@ import { Toast } from 'react-bootstrap'
 import styles from './index.module.css'
 
 const ToastMessage = ({show, toggle, gameID}) => {
+
     return (
         <Toast show={show} onClose={toggle} className={styles.toast}>
             <Toast.Header>

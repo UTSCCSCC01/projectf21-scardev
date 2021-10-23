@@ -14,6 +14,7 @@ import styles from './index.module.css'
 const AddScore = ({show, handleClose}) => {
     const userToken = localStorage.getItem('userToken')
 
+
     const [location, setLocation] = useState("")
     const [date, setDate] = useState("")
     const [score, setScore] = useState(0)
@@ -68,6 +69,7 @@ const AddScore = ({show, handleClose}) => {
         setOppTeam([])
         setCurrTab(0)
     }
+
 
     /**
      * If enter key was pressed then add the player to the 
