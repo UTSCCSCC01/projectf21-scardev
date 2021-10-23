@@ -1,5 +1,11 @@
 import { React, useState } from 'react'
+import { Button } from 'react-bootstrap'
+
 import jwt_decode from 'jwt-decode'
+
+import AddScore from '../AddScore'
+import VerifyScoreModal from '../VerifyScoreModal'
+import ToastMessage from '../ToastMessage'
 
 /**
  * Home Page. This is the main feed page.
@@ -8,7 +14,22 @@ import jwt_decode from 'jwt-decode'
 const Home = () => {
 
     const userToken = localStorage.getItem('userToken')
-    const [agentStatus, setAgentStatus] = useState(true);
+    const [agentStatus, setAgentStatus] = useState(true)
+
+    // Show or hide create game modal
+    const [show, setShow] = useState(false)
+
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+
+    // Show or hide verify game modal
+    const [showVerify, setShowVerify] = useState(false)
+    const handleCloseVerify = () => setShowVerify(false)
+    const handleShowVerfiy = () => setShowVerify(true)
+
+    // Show or hide toast message
+    const [showToast, setShowToast] = useState(true)
+    const toggleShow = () => setShowToast(!showToast)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -22,8 +43,9 @@ const Home = () => {
         }
 
         //TODO: figure out
+        const myHeaders = new Headers()
 
-        
+        myHeaders.append('Authorization', userToken)
 
         fetch('http://localhost:5000/api/v1/user/freeagentstatus', {
             method: 'put',
@@ -37,10 +59,7 @@ const Home = () => {
             if(res.status === 204) {
                 return
             }
-        })
-        .catch(err => {
-            console.log("err", err)
-        })
+        }).catch(err => console.log(err))
     }
 
     return (
@@ -54,6 +73,20 @@ const Home = () => {
                 </select>
                 <input type="submit" value="Save" />
             </form>
+
+            <Button variant="primary" onClick={handleShow} >
+                Add new game
+            </Button>
+
+            <AddScore show={show} handleClose={handleClose} />
+
+            <Button variant="warning" onClick={handleShowVerfiy} >
+                Verify game
+            </Button>
+
+            <VerifyScoreModal show={showVerify} handleClose={handleCloseVerify} />
+
+            <ToastMessage show={showToast} toggle={toggleShow} />
         </div>
     )
 }
