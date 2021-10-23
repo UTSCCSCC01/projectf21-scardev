@@ -21,7 +21,7 @@ Complete user stories SCAR-2, SCAR-5, SCAR-8, SCAR-9 and SCAR-10, SCAR-12, SCAR-
 > SCAR - 5: Salik<br />
 > SCAR - 8: Damian<br />
 > SCAR - 9: Damian<br />
-> SCAR - 10: Rahul, Vigaash<br />
+> SCAR - 10: Rahul, Vigaash, Jameson<br />
 > SCAR - 12: Salik<br />
 > SCAR - 13: Damian, Salik<br />
 > SCAR - 14: Rahul, Vigaash, Damian<br />
