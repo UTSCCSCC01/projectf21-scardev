@@ -2,6 +2,16 @@ import { React, useState, useEffect } from 'react'
 import { Button, ListGroup } from 'react-bootstrap'
 
 import jwt_decode from 'jwt-decode'
+import NavBar from '../../Components/NavigationBar'
+
+
+import AddScore from '../AddScore'
+import VerifyScoreModal from '../VerifyScoreModal'
+import ToastMessage from '../ToastMessage'
+
+import AddScore from '../AddScore'
+import VerifyScoreModal from '../VerifyScoreModal'
+import NavigationBar from '../../Components/NavigationBar'
 
 import AddScore from '../AddScore'
 import VerifyScoreModal from '../VerifyScoreModal'
@@ -18,12 +28,14 @@ const Home = () => {
 
     // Show or hide create game modal
     const [show, setShow] = useState(false)
+
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
     // Show or hide verify game modal
     const [showVerify, setShowVerify] = useState(false)
     const handleCloseVerify = () => setShowVerify(false)
+
     const handleShowVerify = (game) => {
         setGameToShow(game)
         setShowVerify(true)
@@ -50,7 +62,10 @@ const Home = () => {
         fetch('http://localhost:5000/api/v1/user/freeagentstatus', {
             method: 'put',
             body: JSON.stringify(payload),
-            header: myHeaders
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
         })
         .then(res => {
             if(res.status === 204) {
@@ -86,7 +101,7 @@ const Home = () => {
             <h2>Agent Status: {agentStatus}</h2>
 
             <form onSubmit={handleSubmit}>
-                <select name="choice" onChange={(e) => setAgentStatus(e.target.value)}>
+                <select name="choice" onChange={(e) => setAgentStatus(e.target.value === "false" ? false : true)}>
                     <option value={true}>Free Agent</option>
                     <option value={false}>Signed</option>
                 </select>
