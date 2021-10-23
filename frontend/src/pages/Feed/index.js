@@ -13,7 +13,6 @@ import Avatar from '../../Components/Avatar.png'
 import TempPost from '../../Components/templateposts/Temp1.png'
 import TempPost2 from '../../Components/templateposts/Temp2.png'
 
-
 const Feed = () => {
     const userToken = localStorage.getItem('userToken')
 

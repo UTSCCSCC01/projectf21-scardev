@@ -1,3 +1,4 @@
+
 .nav {
     position: sticky;
 }
@@ -47,8 +48,6 @@
 .leftContainer {
     background-color: white;
     height: 100vh;
-    overflow-y: scroll;
-}
 
 .postDetails {
 }

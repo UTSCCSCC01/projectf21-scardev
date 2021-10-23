@@ -16,6 +16,7 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
     const userToken = localStorage.getItem('userToken')
 
     const [team, setTeam] = useState("")
+
     const [type, setType] = useState("")
 
     // Show or hide toast message
@@ -65,6 +66,7 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
     return (
         <>  
             <ToastMessage show={showToast} toggle={toggleShow} gameID={game.ID} />
+
             <Modal show={show} onShow={getTeamAndType} onHide={handleClose} scrollable={true} contentClassName={styles.modal}>
                 <Modal.Header closeButton>
                     Verify Game
@@ -92,6 +94,7 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
                     </Form.Group>
 
                     <Form.Group className="mb-3">
+
                         {   team === "win" ?
                             <Form.Label>Score: <strong className={styles.win}>Win</strong></Form.Label> : 
                             <Form.Label>Score: <strong className={styles.loss}>Loss</strong></Form.Label>
@@ -107,6 +110,7 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
                             <Tab eventKey="team" title="Your Team" tabClassName={styles.tabColor}>
                                 <ListGroup>
                                     {   
+
                                         type === "player" ? 
                                         game.players.map(player => {
                                             return (

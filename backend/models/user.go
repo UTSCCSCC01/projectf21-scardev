@@ -107,6 +107,7 @@ func (u *User) InsertGame(gameId *string) error {
 	filter := bson.D{{Key: "email", Value: u.Email}}
 	update := bson.D{{Key: "$push", Value: bson.D{{Key: "games", Value: objID}}}}
 	_, err = collection.UpdateOne(context.TODO(), filter, update)
+
   return err
 }
 
