@@ -17,7 +17,6 @@ func getTokenString(r *http.Request) (string, bool) {
 	if !in {
 		return "", false
 	}
-
 	return ts[0], true
 }
 

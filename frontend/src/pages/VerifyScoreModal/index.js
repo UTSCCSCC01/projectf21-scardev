@@ -16,29 +16,12 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
     const userToken = localStorage.getItem('userToken')
 
     const [team, setTeam] = useState("")
-    const [status, setStatus] = useState("")
+
+    const [type, setType] = useState("")
 
     // Show or hide toast message
     const [showToast, setShowToast] = useState(false)
     const toggleShow = () => setShowToast(!showToast)
-
-    const getTeam = () => {
-        let email = jwt_decode(userToken).sub
-        if (game.players.includes(email) || email === game.created_by) {
-            setTeam("player")
-        } else {
-            setTeam("opponent")
-        }
-    }
-
-    const getStatus = () => {
-        getTeam()
-        if (team === "player" && game.score > game.opp_score || team === "opponent" && game.score < game.opp_score) {
-            setStatus("Win")
-        } else {
-            setStatus("Loss")
-        }
-    }
 
     const handleApprove = () => {
         setApprovalState(true)
@@ -60,14 +43,30 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
         }).catch(err => console.log(err))
     }
 
-    useEffect(() => {
-        getStatus()
-    }, [])
+    const getTeamAndType = () => {
+        let email = jwt_decode(userToken).sub
+
+        if(game.players.includes(email) || email === game.created_by) {
+            setType("player")
+            if (game.score > game.opp_score) {
+                setTeam("win")
+            } else {
+                setTeam("loss")
+            }
+        } else if(game.opp_players.includes(email)) {
+            setType("opponent")
+            if (game.score < game.opp_score) {
+                setTeam("win")
+            } else {
+                setTeam("loss")
+            }
+        }
+    }
 
     return (
         <>  
             <ToastMessage show={showToast} toggle={toggleShow} gameID={game.ID} />
-            <Modal show={show} onEnter={getStatus} onHide={handleClose} scrollable={true} contentClassName={styles.modal}>
+            <Modal show={show} onShow={getTeamAndType} onHide={handleClose} scrollable={true} contentClassName={styles.modal}>
                 <Modal.Header closeButton>
                     Verify Game
                 </Modal.Header>
@@ -94,7 +93,7 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        {   status === "Win" ?
+                        {   team === "win" ?
                             <Form.Label>Score: <strong className={styles.win}>Win</strong></Form.Label> : 
                             <Form.Label>Score: <strong className={styles.loss}>Loss</strong></Form.Label>
                         }
@@ -109,7 +108,7 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
                             <Tab eventKey="team" title="Your Team" tabClassName={styles.tabColor}>
                                 <ListGroup>
                                     {   
-                                        team === "player" ? 
+                                        type === "player" ? 
                                         game.players.map(player => {
                                             return (
                                                 <ListGroup.Item key={player}>{player}</ListGroup.Item>
@@ -126,7 +125,7 @@ const VerifyScoreModal = ({show, handleClose, game}) => {
                             <Tab eventKey="opponent" title="Opponent" tabClassName={styles.tabColor}>
                                 <ListGroup>
                                     {
-                                        team === "opponent" ? 
+                                        type === "opponent" ? 
                                         game.players.map(player => {
                                             return (
                                                 <ListGroup.Item key={player}>{player}</ListGroup.Item>

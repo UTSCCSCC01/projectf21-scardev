@@ -1,7 +1,11 @@
+.nav {
+    position: sticky;
+}
 
 .container {
     height: 100vh;
-    background-color: gray;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0.05px #d1d1d1;
 }
 
 .addBtn {
@@ -25,9 +29,9 @@
 
 .rightContainer {
     background-color: white;
-    box-shadow: 1px 0px 10px 0.05px #d1d1d1;
     height: 100vh;
     overflow-y: scroll;
+    border-left: 1px solid #d1d1d1;
 }
 
 .verifyBtn {
@@ -38,4 +42,35 @@
 .statusBadge {
     float: right;
     margin-top: 3%;
+}
+
+.leftContainer {
+    background-color: white;
+    height: 100vh;
+
+.postDetails {
+}
+
+.avatar {
+    width: 120%;
+}
+
+.username {
+    color: grey;
+}
+
+.time {
+    text-align: right;
+}
+
+.post {
+    width: 100%;
+    text-align: center;
+}
+
+.commentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5%;
 }
