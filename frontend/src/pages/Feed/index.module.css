@@ -1,0 +1,76 @@
+.nav {
+    position: sticky;
+}
+
+.container {
+    height: 100vh;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0.05px #d1d1d1;
+}
+
+.addBtn {
+    display: flex;
+    background-color: #61D77B;
+    border: none;
+}
+
+.addBtn:hover {
+    background-color: #4fc568;
+    border: none;
+}
+
+.addBtnContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    padding-bottom: 2%;
+}
+
+.rightContainer {
+    background-color: white;
+    height: 100vh;
+    overflow-y: scroll;
+    border-left: 1px solid #d1d1d1;
+}
+
+.verifyBtn {
+    float: right;
+    margin-top: 3%;
+}
+
+.statusBadge {
+    float: right;
+    margin-top: 3%;
+}
+
+.leftContainer {
+    background-color: white;
+    height: 100vh;
+
+.postDetails {
+}
+
+.avatar {
+    width: 120%;
+}
+
+.username {
+    color: grey;
+}
+
+.time {
+    text-align: right;
+}
+
+.post {
+    width: 100%;
+    text-align: center;
+}
+
+.commentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5%;
+}
