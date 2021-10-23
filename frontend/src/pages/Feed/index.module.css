@@ -1,0 +1,41 @@
+
+.container {
+    height: 100vh;
+    background-color: gray;
+}
+
+.addBtn {
+    display: flex;
+    background-color: #61D77B;
+    border: none;
+}
+
+.addBtn:hover {
+    background-color: #4fc568;
+    border: none;
+}
+
+.addBtnContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    padding-bottom: 2%;
+}
+
+.rightContainer {
+    background-color: white;
+    box-shadow: 1px 0px 10px 0.05px #d1d1d1;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.verifyBtn {
+    float: right;
+    margin-top: 3%;
+}
+
+.statusBadge {
+    float: right;
+    margin-top: 3%;
+}

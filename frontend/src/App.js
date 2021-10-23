@@ -7,6 +7,7 @@ import Landing from './pages/Landing'
 import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
+import Feed from './pages/Feed'
 import ProfileBar from './Components/ProfileTab.js'
 import NavigationBar from './Components/NavigationBar.js';
  
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/login" component={SignIn} />
         <Route path="/profile" component={ProfileBar} />
         <Route path="/navbar" component={NavigationBar} />
+        <Route path="/feed" component={Feed} />
       </Switch>
     </Router>
   )
