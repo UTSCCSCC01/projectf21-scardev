@@ -12,6 +12,7 @@ import styles from './index.module.css'
  * @returns AddScore Modal
  */
 const AddScore = ({show, handleClose}) => {
+    const userToken = localStorage.getItem('userToken')
 
     const [location, setLocation] = useState("")
     const [date, setDate] = useState("")
@@ -25,6 +26,7 @@ const AddScore = ({show, handleClose}) => {
     const [error, setError] = useState(null)
 
     const handleSubmit = () => {
+
         const payload = {
             created_by: jwt_decode(localStorage.getItem("userToken")).sub,
             location: location,
@@ -35,6 +37,8 @@ const AddScore = ({show, handleClose}) => {
             opp_players: oppTeam,
             approved: false
         }
+
+        console.log(payload)
 
         fetch('http://localhost:5000/api/v1/games/create', {
             method: 'post',
