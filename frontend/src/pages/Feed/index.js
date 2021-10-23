@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Button, ListGroup, Container, Row, Col, Badge } from 'react-bootstrap'
+import { Button, ListGroup, Container, Row, Col, Badge, Image } from 'react-bootstrap'
 
 import jwt_decode from 'jwt-decode'
 
@@ -8,6 +8,9 @@ import VerifyScoreModal from '../VerifyScoreModal'
 import NavigationBar from '../../Components/NavigationBar'
 
 import styles from './index.module.css'
+
+import Avatar from '../../Components/Avatar.png'
+import TempPost from '../../Components/templateposts/Temp1.png'
 
 const Feed = () => {
     const userToken = localStorage.getItem('userToken')
@@ -54,8 +57,41 @@ const Feed = () => {
 
             <Container className={styles.container}>
                 <Row className={"justify-content-md-center"}>
-                    <Col xs={9}>
-                        Hello World
+                    <Col xs={8} className={styles.leftContienr}>
+                        <ListGroup>
+                            <ListGroup.Item>
+                                <Container>
+                                    <Row className={styles.postDetails}>
+                                        <Col xs={1}>
+                                            <Image src={Avatar} roundedCircle className={styles.avatar}/>                 
+                                        </Col>                   
+                                        <Col xs={9}>
+                                            <div className="fw-bold">Frederich Roundhouse</div>
+                                            <div className={styles.username}>@f_rndhouse</div>
+                                        </Col>
+                                        <Col xs={2} className={styles.time}>
+                                            <div className={styles.username}>3 hours ago</div>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={10} className={styles.post}>
+                                            <Image src={TempPost}/>                 
+                                        </Col> 
+                                    </Row>
+                                    <Row className={styles.commentContainer}>
+                                        <Col xs={1}>
+                                            <Image src={Avatar} roundedCircle className={styles.avatar}/>                 
+                                        </Col>                   
+                                        <Col xs={2}>
+                                            <div className={styles.username}>@f_rndhouse</div>
+                                        </Col>
+                                        <Col>
+                                            Lorem ipsum dolor sit amet, consectetur
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </ListGroup.Item>
+                        </ListGroup>
                     </Col>
                     <Col className={styles.rightContainer}>
 
