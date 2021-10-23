@@ -25,6 +25,10 @@ import AddScore from '../AddScore'
 import VerifyScoreModal from '../VerifyScoreModal'
 import NavigationBar from '../../Components/NavigationBar'
 
+import AddScore from '../AddScore'
+import VerifyScoreModal from '../VerifyScoreModal'
+import NavigationBar from '../../Components/NavigationBar'
+
 /**
  * Home Page. This is the main feed page.
  * @returns Home Page
