@@ -50,7 +50,10 @@ const Home = () => {
         fetch('http://localhost:5000/api/v1/user/freeagentstatus', {
             method: 'put',
             body: JSON.stringify(payload),
-            header: myHeaders
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
         })
         .then(res => {
             if(res.status === 204) {
@@ -62,9 +65,9 @@ const Home = () => {
     return (
         <div>        
             <h1>Hello, user {userToken}</h1>
-            <h2>Agent Status: {agentStatus}</h2>
+            <h2>Agent Status: {agentStatus.toString()}</h2>
             <form onSubmit={handleSubmit}>
-                <select name="choice" onChange={(e) => setAgentStatus(e.target.value)}>
+                <select name="choice" onChange={(e) => setAgentStatus(e.target.value === "false" ? false : true)}>
                     <option value={true}>Free Agent</option>
                     <option value={false}>Signed</option>
                 </select>
