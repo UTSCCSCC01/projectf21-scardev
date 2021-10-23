@@ -27,17 +27,17 @@ const SignIn = () => {
             body: JSON.stringify(payload)
         })
         .then(res => {
-            if (res.status == 200){
+            if (res.status === 200){
                 res.json().then(body => {
                     localStorage.setItem('userToken', body.data)
-                    history.push('/home')
+                    history.push('/feed')
                     return
                 })
             }
             
-            if (res.status == 401) 
+            if (res.status === 401) 
                 setError("Invalid login, try again.")
-            else
+            else if (res.statuse !== 200)
                 setError("Login request failed, please try again.") 
         })
     }

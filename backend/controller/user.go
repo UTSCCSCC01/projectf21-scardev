@@ -12,6 +12,9 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 )
+type JWTToken struct {
+	Token string
+}
 
 type UserController struct {
 }
@@ -31,6 +34,38 @@ func makeJWT(email string) (string, error) {
 		return "", err
 	}
 	return tknString, nil
+}
+
+func getEmailFromToken(tokenStr string) string {
+	tokenParsed, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+		return secretKey, nil
+	})
+
+	if err!= nil{
+		return ""
+	}
+	claims, ok := tokenParsed.Claims.(jwt.MapClaims)
+	if ok && tokenParsed.Valid{
+		email := claims["sub"]
+
+		return email.(string)
+	}
+	return ""
+}
+
+func (u *UserController) GetUserName(w http.ResponseWriter, r *http.Request) {
+	var token JWTToken
+	json.NewDecoder(r.Body).Decode(&token)
+
+	email := getEmailFromToken(token.Token)
+	user := &models.User{}
+	user.Email = &email
+
+	properUser ,exists := user.IsExisting()
+	if exists{
+		name := *properUser.FirstName + " " + *properUser.LastName
+		helpers.SendResponse(helpers.Success, name, http.StatusOK, w)
+	}
 }
 
 func getHashedPassword(pwd string) (string, error) {
@@ -73,6 +108,8 @@ func authenticatePassword(password, hashedPassword string) bool {
 
 func (u *UserController) Signup(w http.ResponseWriter, r *http.Request) {
 	user, err := initUser(r)
+
+	user.Games = []primitive.ObjectID{}
 
 	if err != nil {
 		helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
@@ -161,3 +198,55 @@ func (u *UserController) UpdateFreeAgentStatus(w http.ResponseWriter, r *http.Re
 
 	helpers.SendResponse(helpers.Success, "", http.StatusNoContent, w)
 }
+
+type FollowRequest struct {
+	PersonToFollow string `json:"person_to_follow"`
+}
+
+func (u *UserController) Follow(w http.ResponseWriter, r *http.Request) {
+
+	//CHECK IF PERSON ALREADY FOLLOWS, AND CHECK IF YOU CAN FOLLOW URSELF
+
+	user := &models.User{}
+	e := r.Header.Get("OpenRun-Email")
+	user.Email = &e
+
+	fr := &FollowRequest{}
+	err := json.NewDecoder(r.Body).Decode(fr)
+	if err != nil {
+			helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
+			return
+	}
+
+	otherUser := &models.User{}
+	otherUser.Email = &fr.PersonToFollow
+	_, exists := otherUser.IsExisting()
+	if !exists {
+			helpers.SendResponse(helpers.Error, "user who you want to follow does not exist with given email", http.StatusNotFound, w)
+			return
+	}
+
+	_, exists = user.IsExisting()
+
+	if !exists {
+			helpers.SendResponse(helpers.Error, "user does not exist with given email", http.StatusNotFound, w)
+			return
+	}
+
+	err = user.AddToMyFollowing(fr.PersonToFollow) //how to get the parameter which is objectid at a string of person I want to follow
+
+	if err != nil {
+			helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
+			return
+	}
+
+	err = user.AddToOtherPersonsFollowers(fr.PersonToFollow) //how to get the parameter which is objectid at a string of person I want to follow
+
+	if err != nil {
+			helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
+			return
+	}
+
+	helpers.SendResponse(helpers.Success, "", http.StatusNoContent, w)
+}
+

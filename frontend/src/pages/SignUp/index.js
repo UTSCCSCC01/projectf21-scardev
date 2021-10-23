@@ -32,7 +32,7 @@ const SignUp = () => {
             body: JSON.stringify(payload)
         })
         .then(res => {
-            if (res.status == 200){
+            if (res.status === 200){
                 res.json().then(body => {
                     history.push('/login')
                     return
@@ -66,7 +66,7 @@ const SignUp = () => {
                 <br style={{clear:'both'}} />
 
                 <label>Phone</label>
-                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={styles.inputLong}/>
+                <input type="tel" placeholder="ex. 416-123-4567" value={phone} onChange={(e) => setPhone(e.target.value)} className={styles.inputLong}/>
                 <label>Email</label>
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={styles.inputLong}/>
                 <label>Password</label>
