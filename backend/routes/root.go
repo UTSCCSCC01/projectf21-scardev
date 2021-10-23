@@ -92,4 +92,5 @@ func InitRoutes(r *mux.Router) {
 	r.Handle("/api/v1/user/following", middleware.IsJWTAuthorized(uc.Follow)).Methods("POST") //handlefunc or handle
 	//Protect all endpoints using middleware.IsJWTAuthorized
 	//Prefix actual endpoints with /api/v1
+	r.Handle("/api/v1/user/getname", middleware.IsJWTAuthorized(uc.GetUserName)).Methods("PUT")
 }

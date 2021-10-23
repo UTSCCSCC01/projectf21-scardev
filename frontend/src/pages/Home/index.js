@@ -2,6 +2,7 @@ import { React, useState } from 'react'
 import { Button } from 'react-bootstrap'
 
 import jwt_decode from 'jwt-decode'
+import NavBar from '../../Components/NavigationBar'
 
 import AddScore from '../AddScore'
 import VerifyScoreModal from '../VerifyScoreModal'
@@ -63,7 +64,8 @@ const Home = () => {
     }
 
     return (
-        <div>        
+        <div>
+            <NavBar/>
             <h1>Hello, user {userToken}</h1>
             <h2>Agent Status: {agentStatus.toString()}</h2>
             <form onSubmit={handleSubmit}>
