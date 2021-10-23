@@ -89,6 +89,7 @@ func InitRoutes(r *mux.Router) {
 					On error - relevent error
 	*/
 	r.Handle("/api/v1/user/freeagentstatus", middleware.IsJWTAuthorized(uc.UpdateFreeAgentStatus)).Methods("PUT")
+	r.Handle("/api/v1/user/following", middleware.IsJWTAuthorized(uc.Follow)).Methods("POST") //handlefunc or handle
 	//Protect all endpoints using middleware.IsJWTAuthorized
 	//Prefix actual endpoints with /api/v1
 }

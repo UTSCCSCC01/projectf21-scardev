@@ -161,3 +161,55 @@ func (u *UserController) UpdateFreeAgentStatus(w http.ResponseWriter, r *http.Re
 
 	helpers.SendResponse(helpers.Success, "", http.StatusNoContent, w)
 }
+
+type FollowRequest struct {
+	PersonToFollow string `json:"person_to_follow"`
+}
+
+func (u *UserController) Follow(w http.ResponseWriter, r *http.Request) {
+
+	//CHECK IF PERSON ALREADY FOLLOWS, AND CHECK IF YOU CAN FOLLOW URSELF
+
+	user := &models.User{}
+	e := r.Header.Get("OpenRun-Email")
+	user.Email = &e
+
+	fr := &FollowRequest{}
+	err := json.NewDecoder(r.Body).Decode(fr)
+	if err != nil {
+			helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
+			return
+	}
+
+	otherUser := &models.User{}
+	otherUser.Email = &fr.PersonToFollow
+	_, exists := otherUser.IsExisting()
+	if !exists {
+			helpers.SendResponse(helpers.Error, "user who you want to follow does not exist with given email", http.StatusNotFound, w)
+			return
+	}
+
+	_, exists = user.IsExisting()
+
+	if !exists {
+			helpers.SendResponse(helpers.Error, "user does not exist with given email", http.StatusNotFound, w)
+			return
+	}
+
+	err = user.AddToMyFollowing(fr.PersonToFollow) //how to get the parameter which is objectid at a string of person I want to follow
+
+	if err != nil {
+			helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
+			return
+	}
+
+	err = user.AddToOtherPersonsFollowers(fr.PersonToFollow) //how to get the parameter which is objectid at a string of person I want to follow
+
+	if err != nil {
+			helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
+			return
+	}
+
+	helpers.SendResponse(helpers.Success, "", http.StatusNoContent, w)
+}
+
