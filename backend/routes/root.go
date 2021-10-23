@@ -18,6 +18,19 @@ func testProtected(w http.ResponseWriter, r *http.Request) {
 }
 
 func InitRoutes(r *mux.Router) {
+	r.Methods("OPTIONS").HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request){
+			headers := w.Header()
+			headers.Add("Access-Control-Allow-Origin", "*")
+			headers.Add("Vary", "Origin")
+			headers.Add("Vary", "Access-Control-Request-Method")
+			headers.Add("Vary", "Access-Control-Request-Headers")
+			headers.Add("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, Authorization, X-CSRF-Token")
+			headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
+			w.WriteHeader(http.StatusOK)
+			return
+		},
+	)
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		t := test{
 			Name: "salik",
@@ -78,4 +91,5 @@ func InitRoutes(r *mux.Router) {
 	r.Handle("/api/v1/user/freeagentstatus", middleware.IsJWTAuthorized(uc.UpdateFreeAgentStatus)).Methods("PUT")
 	//Protect all endpoints using middleware.IsJWTAuthorized
 	//Prefix actual endpoints with /api/v1
+	r.Handle("/api/v1/user/getname", middleware.IsJWTAuthorized(uc.GetUserName)).Methods("PUT")
 }

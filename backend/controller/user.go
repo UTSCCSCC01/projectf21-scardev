@@ -12,6 +12,9 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 )
+type JWTToken struct {
+	Token string
+}
 
 type UserController struct {
 }
@@ -31,6 +34,38 @@ func makeJWT(email string) (string, error) {
 		return "", err
 	}
 	return tknString, nil
+}
+
+func getEmailFromToken(tokenStr string) string {
+	tokenParsed, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+		return secretKey, nil
+	})
+
+	if err!= nil{
+		return ""
+	}
+	claims, ok := tokenParsed.Claims.(jwt.MapClaims)
+	if ok && tokenParsed.Valid{
+		email := claims["sub"]
+
+		return email.(string)
+	}
+	return ""
+}
+
+func (u *UserController) GetUserName(w http.ResponseWriter, r *http.Request) {
+	var token JWTToken
+	json.NewDecoder(r.Body).Decode(&token)
+
+	email := getEmailFromToken(token.Token)
+	user := &models.User{}
+	user.Email = &email
+
+	properUser ,exists := user.IsExisting()
+	if exists{
+		name := *properUser.FirstName + " " + *properUser.LastName
+		helpers.SendResponse(helpers.Success, name, http.StatusOK, w)
+	}
 }
 
 func getHashedPassword(pwd string) (string, error) {
