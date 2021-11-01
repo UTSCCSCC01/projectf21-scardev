@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import avatar from "../assets/Avatar.png"
-import follow from "../assets/FollowButton.png"
+import avatar from '../../assets/Avatar.png'
+import follow from "../../assets/FollowButton.png"
 
 import "./ProfileTab.css"
 // Component for the profile bar section of the profile page

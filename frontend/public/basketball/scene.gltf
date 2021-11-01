@@ -1,0 +1,336 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 448,
+      "max": [
+        0.97009998559951782,
+        0.97009998559951782,
+        0.96934002637863159
+      ],
+      "min": [
+        -0.97009998559951782,
+        -0.97009998559951782,
+        -0.96934002637863159
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 5376,
+      "componentType": 5126,
+      "count": 448,
+      "max": [
+        0.97119390964508057,
+        0.97079318761825562,
+        0.98314297199249268
+      ],
+      "min": [
+        -0.97119390964508057,
+        -0.97079318761825562,
+        -0.98314297199249268
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 448,
+      "max": [
+        0.99176293611526489,
+        0.94487482309341431,
+        0.99986618757247925,
+        1
+      ],
+      "min": [
+        -0.99176788330078125,
+        -0.94487464427947998,
+        -1,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 448,
+      "max": [
+        0.98189997673034668,
+        0.98549002408981323
+      ],
+      "min": [
+        0.014139999635517597,
+        0.019039999693632126
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 1872,
+      "max": [
+        447
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 10752,
+      "componentType": 5126,
+      "count": 496,
+      "max": [
+        0.97009998559951782,
+        0.97009998559951782,
+        0.96934002637863159
+      ],
+      "min": [
+        -0.97009998559951782,
+        -0.97009998559951782,
+        -0.96934002637863159
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 16704,
+      "componentType": 5126,
+      "count": 496,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 7168,
+      "componentType": 5126,
+      "count": 496,
+      "max": [
+        0.99990278482437134,
+        0.94411951303482056,
+        0.99989062547683716,
+        1
+      ],
+      "min": [
+        -1,
+        -0.9441225528717041,
+        -1,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 3584,
+      "componentType": 5126,
+      "count": 496,
+      "max": [
+        0.98847997188568115,
+        0.99243998527526855
+      ],
+      "min": [
+        0.0075599998235702515,
+        0.01181000005453825
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 7488,
+      "componentType": 5125,
+      "count": 1680,
+      "max": [
+        495
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "afurokn (https://sketchfab.com/afurokn)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/basketball-2343abdae7674f46ad85071858db93c6",
+      "title": "Basketball"
+    },
+    "generator": "Sketchfab-6.33.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 14208,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 7552,
+      "byteOffset": 14208,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 22656,
+      "byteOffset": 21760,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 15104,
+      "byteOffset": 44416,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 59520,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.81036995104363518,
+          0.19837352793584132,
+          0.047729033535334607,
+          1
+        ],
+        "metallicFactor": 0.32317073170731708,
+        "roughnessFactor": 0.56707317073170738
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material.001",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0031277375280253797,
+          0.0093707635901024745,
+          0.011011230500289839,
+          1
+        ],
+        "metallicFactor": 0.18902439024390244,
+        "roughnessFactor": 0.45121951219512196
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Basketball_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Basketball_1",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "Root"
+    },
+    {
+      "children": [
+        4,
+        5
+      ],
+      "name": "Basketball"
+    },
+    {
+      "mesh": 0,
+      "name": "Basketball_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Basketball_1"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+

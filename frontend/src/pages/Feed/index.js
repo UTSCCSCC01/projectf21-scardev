@@ -6,11 +6,11 @@ import jwt_decode from 'jwt-decode'
 
 import AddScore from '../AddScore'
 import VerifyScoreModal from '../VerifyScoreModal'
-import NavigationBar from '../../Components/NavigationBar'
+import NavigationBar from '../../Components/NavigationBar/NavigationBar'
 
 import styles from './index.module.css'
 
-import Avatar from '../../Components/Avatar.png'
+import Avatar from '../../assets/Avatar.png'
 import TempPost from '../../Components/templateposts/Temp1.png'
 import TempPost2 from '../../Components/templateposts/Temp2.png'
 
