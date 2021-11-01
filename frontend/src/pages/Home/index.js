@@ -2,32 +2,10 @@ import { React, useState, useEffect } from 'react'
 import { Button, ListGroup } from 'react-bootstrap'
 
 import jwt_decode from 'jwt-decode'
-import NavBar from '../../Components/NavigationBar'
-
 
 import AddScore from '../AddScore'
 import VerifyScoreModal from '../VerifyScoreModal'
-import ToastMessage from '../ToastMessage'
-
-import AddScore from '../AddScore'
-import VerifyScoreModal from '../VerifyScoreModal'
-import NavigationBar from '../../Components/NavigationBar'
-
-import AddScore from '../AddScore'
-import VerifyScoreModal from '../VerifyScoreModal'
-import NavigationBar from '../../Components/NavigationBar'
-
-import AddScore from '../AddScore'
-import VerifyScoreModal from '../VerifyScoreModal'
-import NavigationBar from '../../Components/NavigationBar'
-
-import AddScore from '../AddScore'
-import VerifyScoreModal from '../VerifyScoreModal'
-import NavigationBar from '../../Components/NavigationBar'
-
-import AddScore from '../AddScore'
-import VerifyScoreModal from '../VerifyScoreModal'
-import NavigationBar from '../../Components/NavigationBar'
+import NavigationBar from '../../Components/NavigationBar/NavigationBar'
 
 /**
  * Home Page. This is the main feed page.

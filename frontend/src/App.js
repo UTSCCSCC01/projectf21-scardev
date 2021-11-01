@@ -8,9 +8,6 @@ import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Feed from './pages/Feed'
-import ProfileBar from './Components/ProfileTab.js'
-import NavigationBar from './Components/NavigationBar.js';
- 
 import Profile from './pages/Profile'
 
 const App = () => {
@@ -23,7 +20,7 @@ const App = () => {
         <Route path="/home" component={Home} /> 
         <Route path="/login" component={SignIn} />
         <Route path="/feed" component={Feed} />
-        <Route path="/profile" component={Profile}/>
+        <Route path="/profile" component={Profile} />
       </Switch>
     </Router>
   )

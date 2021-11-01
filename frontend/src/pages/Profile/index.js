@@ -1,7 +1,8 @@
 import React from 'react'
-import NavigationBar from '../../Components/NavigationBar'
-import ProfileTab from '../../Components/ProfileTab'
-import ProfileActivity from '../../Components/ProfileActivity'
+import NavigationBar from '../../Components/NavigationBar/NavigationBar'
+import ProfileTab from '../../Components/ProfileTab/ProfileTab'
+import ProfileActivity from '../../Components/ProfileActivity/ProfileActivity'
+import ProfileBadges from '../../Components/ProfileBadges/ProfileBadges'
 
 /**
  * User profile Page.
@@ -10,9 +11,10 @@ import ProfileActivity from '../../Components/ProfileActivity'
 const Profile = () => {
     return (
         <>
-        <NavigationBar/>
-        <ProfileTab/>
-        <ProfileActivity/>
+            <NavigationBar />
+            <ProfileTab />
+            <ProfileActivity />
+            <ProfileBadges />
         </>
     )
 }
