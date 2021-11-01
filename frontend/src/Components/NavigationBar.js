@@ -16,7 +16,7 @@ const NavigationBar = () => {
             {/* Background for navigation bar */}
              <Navbar className="bg-white main-navigation" expand="lg">
                {/* Image and link for homepage button */}
-              <Navbar.Brand as={Link} to="/home"><img alt=""
+              <Navbar.Brand as={Link} to="/feed"><img alt=""
                                     src={image}
                                     width="110"
                                     height="30"
