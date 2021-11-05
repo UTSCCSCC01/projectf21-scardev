@@ -14,7 +14,7 @@ Complete user stories SCAR-3, SCAR-15, SCAR-19, SCAR-34 .
 > RPM.md: Vigaash  <br />
 > System Design Document: Vigaash, Rahul, Jameson <br />
 > SCAR - 3: Salik, Vigaash, Rahul<br />
-> SCAR - 15: Vigaash, Rahul<br />
+> SCAR - 15: Salik, Vigaash, Rahul<br />
 > SCAR - 19: Damian<br />
 > SCAR - 34: Jameson<br />
 
