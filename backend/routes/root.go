@@ -40,6 +40,7 @@ func InitRoutes(r *mux.Router) {
 
 	uc := controller.UserController{}
 	gc := controller.GameController{}
+	cc := controller.CourtsController{}
 
 	/*
 			Expects - {
@@ -102,4 +103,8 @@ func InitRoutes(r *mux.Router) {
 	r.HandleFunc("/api/v1/games/approve", gc.Approve).Methods("POST")
 
 	r.Handle("/api/v1/user/getname", middleware.IsJWTAuthorized(uc.GetUserName)).Methods("PUT")
+
+	//Courts 
+	r.Handle("/api/v1/courts", middleware.IsJWTAuthorized(cc.GetAllCourts)).Methods("GET")
+	r.Handle("/api/v1/courts", middleware.IsJWTAuthorized(cc.AddNewCourt)).Methods("POST")
 }
