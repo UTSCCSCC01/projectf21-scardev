@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import Feed from './pages/Feed'
 import Profile from './pages/Profile'
+import CourtsMap from './pages/CourtsMap'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/login" component={SignIn} />
         <Route path="/feed" component={Feed} />
         <Route path="/profile" component={Profile} />
+        <Route path="/map" component={CourtsMap} />
       </Switch>
     </Router>
   )
