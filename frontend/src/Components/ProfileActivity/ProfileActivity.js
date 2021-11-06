@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Row, Col, Image, Table} from "react-bootstrap";
 import './ProfileActivity.css'
-import temp1 from './templateposts/Temp1.png'
-import temp2 from './templateposts/Temp2.png'
-import temp3 from './templateposts/Temp3.png'
+import temp1 from '../templateposts/Temp1.png'
+import temp2 from '../templateposts/Temp2.png'
+import temp3 from '../templateposts/Temp3.png'
 
 // Component for the activity portion of the profile
 // Consists of Recent Activity section and Posts section
