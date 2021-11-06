@@ -111,7 +111,6 @@ const ProfileBar = () =>{
            {/*<Row className="middleRow">
                               <Col className="userName">@f_rndhouse</Col>
                           </Row>*/}
-
             {/* Bottom section that consists followers, following and level */}
             <Row className="bottomRow">
                 <Col>Followers</Col>

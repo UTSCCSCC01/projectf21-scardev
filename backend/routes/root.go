@@ -37,7 +37,11 @@ func InitRoutes(r *mux.Router) {
 		}
 		helpers.SendResponse(helpers.Success, t, 200, w)
 	})
+
 	uc := controller.UserController{}
+	gc := controller.GameController{}
+	cc := controller.CourtsController{}
+
 	/*
 			Expects - {
 				first_name: "name"
@@ -92,9 +96,19 @@ func InitRoutes(r *mux.Router) {
 	r.Handle("/api/v1/user/following", middleware.IsJWTAuthorized(uc.Follow)).Methods("POST") //handlefunc or handle
 	//Protect all endpoints using middleware.IsJWTAuthorized
 	//Prefix actual endpoints with /api/v1
-	r.Handle("/api/v1/user/getname", middleware.IsJWTAuthorized(uc.GetUserName)).Methods("PUT")
 	r.Handle("/api/v1/user/getfollowerscount", middleware.IsJWTAuthorized(uc.GetNumberOfFollowers)).Methods("PUT")
 	r.Handle("/api/v1/user/getfollowingcount", middleware.IsJWTAuthorized(uc.GetNumberOfFollowing)).Methods("PUT")
 	r.Handle("/api/v1/user/getlevel", middleware.IsJWTAuthorized(uc.GetLevel)).Methods("PUT")
 	r.Handle("/api/v1/user/changelevel", middleware.IsJWTAuthorized(uc.ChangeLevel)).Methods("PUT")
+
+	/** Damian's routes - check for bs pls **/
+	r.HandleFunc("/api/v1/games/create", gc.CreateGame).Methods("POST")
+	r.HandleFunc("/api/v1/games/get", gc.GetGames).Methods("GET")
+	r.HandleFunc("/api/v1/games/approve", gc.Approve).Methods("POST")
+
+	r.Handle("/api/v1/user/getname", middleware.IsJWTAuthorized(uc.GetUserName)).Methods("PUT")
+
+	//Courts 
+	r.Handle("/api/v1/courts", middleware.IsJWTAuthorized(cc.GetAllCourts)).Methods("GET")
+	r.Handle("/api/v1/courts", middleware.IsJWTAuthorized(cc.AddNewCourt)).Methods("POST")
 }

@@ -13,10 +13,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 )
-
 type JWTToken struct {
 	Token string
 }
+
 
 type UserController struct {
 }
@@ -110,6 +110,8 @@ func authenticatePassword(password, hashedPassword string) bool {
 
 func (u *UserController) Signup(w http.ResponseWriter, r *http.Request) {
 	user, err := initUser(r)
+
+	user.Games = []primitive.ObjectID{}
 
 	if err != nil {
 		helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
