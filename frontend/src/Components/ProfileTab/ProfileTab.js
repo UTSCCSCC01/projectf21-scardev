@@ -5,6 +5,7 @@ import avatar from "../assets/Avatar.png"
 import Drop from "./DropDown"
 import follow from "../assets/FollowButton.png"
 
+
 import 'semantic-ui-css/components/dropdown.min.css'
 import 'semantic-ui-css/components/menu.min.css'
 import 'semantic-ui-css/components/list.min.css'
@@ -116,6 +117,7 @@ const ProfileBar = () =>{
                 <Col>Followers</Col>
                 <Col>Following</Col>
                 <Col>Level</Col>
+                <Col></Col>
             </Row>
             {/* Actual data for the above categories */}
             <Row className="followingNumbers">
@@ -124,7 +126,6 @@ const ProfileBar = () =>{
                 <Col className="dropmenu"><Drop /> </Col>
             </Row>
             </div>
-            
         </Container>
     );
 }
