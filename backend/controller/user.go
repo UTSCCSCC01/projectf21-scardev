@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"openrun/helpers"
 	"openrun/models"
@@ -12,6 +13,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"golang.org/x/crypto/bcrypt"
 )
+
 type JWTToken struct {
 	Token string
 }
@@ -41,11 +43,11 @@ func getEmailFromToken(tokenStr string) string {
 		return secretKey, nil
 	})
 
-	if err!= nil{
+	if err != nil {
 		return ""
 	}
 	claims, ok := tokenParsed.Claims.(jwt.MapClaims)
-	if ok && tokenParsed.Valid{
+	if ok && tokenParsed.Valid {
 		email := claims["sub"]
 
 		return email.(string)
@@ -61,8 +63,8 @@ func (u *UserController) GetUserName(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	user.Email = &email
 
-	properUser ,exists := user.IsExisting()
-	if exists{
+	properUser, exists := user.IsExisting()
+	if exists {
 		name := *properUser.FirstName + " " + *properUser.LastName
 		helpers.SendResponse(helpers.Success, name, http.StatusOK, w)
 	}
@@ -129,6 +131,8 @@ func (u *UserController) Signup(w http.ResponseWriter, r *http.Request) {
 		helpers.SendResponse(helpers.Error, "user with given email already exists, please try again", http.StatusBadRequest, w)
 		return
 	}
+	defaultLevel := "Amateur"
+	user.Level = &defaultLevel
 
 	id, err := user.Insert()
 
@@ -212,39 +216,107 @@ func (u *UserController) Follow(w http.ResponseWriter, r *http.Request) {
 	fr := &FollowRequest{}
 	err := json.NewDecoder(r.Body).Decode(fr)
 	if err != nil {
-			helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
-			return
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
+		return
 	}
 
 	otherUser := &models.User{}
 	otherUser.Email = &fr.PersonToFollow
 	_, exists := otherUser.IsExisting()
 	if !exists {
-			helpers.SendResponse(helpers.Error, "user who you want to follow does not exist with given email", http.StatusNotFound, w)
-			return
+		helpers.SendResponse(helpers.Error, "user who you want to follow does not exist with given email", http.StatusNotFound, w)
+		return
 	}
 
 	_, exists = user.IsExisting()
 
 	if !exists {
-			helpers.SendResponse(helpers.Error, "user does not exist with given email", http.StatusNotFound, w)
-			return
+		helpers.SendResponse(helpers.Error, "user does not exist with given email", http.StatusNotFound, w)
+		return
 	}
 
 	err = user.AddToMyFollowing(fr.PersonToFollow) //how to get the parameter which is objectid at a string of person I want to follow
 
 	if err != nil {
-			helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
-			return
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
+		return
 	}
 
 	err = user.AddToOtherPersonsFollowers(fr.PersonToFollow) //how to get the parameter which is objectid at a string of person I want to follow
 
 	if err != nil {
-			helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
-			return
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusNotFound, w)
+		return
 	}
 
 	helpers.SendResponse(helpers.Success, "", http.StatusNoContent, w)
 }
 
+func (u *UserController) GetNumberOfFollowers(w http.ResponseWriter, r *http.Request) {
+	var token JWTToken
+	json.NewDecoder(r.Body).Decode(&token)
+
+	email := getEmailFromToken(token.Token)
+	user := &models.User{}
+	user.Email = &email
+
+	properUser, exists := user.IsExisting()
+	if exists {
+		followersCount := properUser.CountFollowers()
+		helpers.SendResponse(helpers.Success, followersCount, http.StatusOK, w)
+	}
+}
+
+func (u *UserController) GetNumberOfFollowing(w http.ResponseWriter, r *http.Request) {
+	var token JWTToken
+	json.NewDecoder(r.Body).Decode(&token)
+
+	email := getEmailFromToken(token.Token)
+	user := &models.User{}
+	user.Email = &email
+
+	properUser, exists := user.IsExisting()
+	if exists {
+		followingCount := properUser.CountFollowing()
+		helpers.SendResponse(helpers.Success, followingCount, http.StatusOK, w)
+	}
+}
+
+func (u *UserController) GetLevel(w http.ResponseWriter, r *http.Request) {
+	var token JWTToken
+	json.NewDecoder(r.Body).Decode(&token)
+	// fmt.Println(token)
+	email := getEmailFromToken(token.Token)
+	user := &models.User{}
+	user.Email = &email
+
+	properUser, exists := user.IsExisting()
+	if exists {
+		userLevel := properUser.GetLevel()
+		helpers.SendResponse(helpers.Success, userLevel, http.StatusOK, w)
+	}
+}
+
+type UserLevel struct {
+	Level string
+}
+
+func (u *UserController) ChangeLevel(w http.ResponseWriter, r *http.Request) {
+	var testLevel UserLevel
+	err := json.NewDecoder(r.Body).Decode(&testLevel)
+	fmt.Println(testLevel)
+	if err != nil {
+		fmt.Println("There was an error!")
+		helpers.SendResponse(helpers.Error, err.Error(), http.StatusBadRequest, w)
+		return
+	}
+	email := getEmailFromToken(r.Header.Get("Authorization"))
+	user := &models.User{}
+	user.Email = &email
+	testString := testLevel.Level
+	properUser, exists := user.IsExisting()
+	if exists {
+		properUser.ChangeLevel(testString)
+		helpers.SendResponse(helpers.Success, "", http.StatusOK, w)
+	}
+}

@@ -19,7 +19,7 @@ func testProtected(w http.ResponseWriter, r *http.Request) {
 
 func InitRoutes(r *mux.Router) {
 	r.Methods("OPTIONS").HandlerFunc(
-		func(w http.ResponseWriter, r *http.Request){
+		func(w http.ResponseWriter, r *http.Request) {
 			headers := w.Header()
 			headers.Add("Access-Control-Allow-Origin", "*")
 			headers.Add("Vary", "Origin")
@@ -93,4 +93,8 @@ func InitRoutes(r *mux.Router) {
 	//Protect all endpoints using middleware.IsJWTAuthorized
 	//Prefix actual endpoints with /api/v1
 	r.Handle("/api/v1/user/getname", middleware.IsJWTAuthorized(uc.GetUserName)).Methods("PUT")
+	r.Handle("/api/v1/user/getfollowerscount", middleware.IsJWTAuthorized(uc.GetNumberOfFollowers)).Methods("PUT")
+	r.Handle("/api/v1/user/getfollowingcount", middleware.IsJWTAuthorized(uc.GetNumberOfFollowing)).Methods("PUT")
+	r.Handle("/api/v1/user/getlevel", middleware.IsJWTAuthorized(uc.GetLevel)).Methods("PUT")
+	r.Handle("/api/v1/user/changelevel", middleware.IsJWTAuthorized(uc.ChangeLevel)).Methods("PUT")
 }
