@@ -2,7 +2,6 @@ import React from "react";
 import {Navbar, Nav, NavDropdown, Container, Form, Button, FormControl} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../index.css'
-
 import image from '../assets/OpenRun.png'
 import feed from '../assets/Feed.png'
 import maps from '../assets/Maps.png'

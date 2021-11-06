@@ -6,19 +6,21 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type User struct {
-	ID          primitive.ObjectID   `bson:"_id"`
-	FirstName   *string              `json:"first_name" validate:"max=100"`
-	LastName    *string              `json:"last_name" validate:"max=100"`
-	Password    *string              `json:"password" validate:"required"`
-	Email       *string              `json:"email" validate:"required"`
-	Phone       *string              `json:"phone"`
-	IsFreeAgent bool                 `json:"is_free_agent"`
+	ID          primitive.ObjectID `bson:"_id"`
+	FirstName   *string            `json:"first_name" validate:"max=100"`
+	LastName    *string            `json:"last_name" validate:"max=100"`
+	Password    *string            `json:"password" validate:"required"`
+	Email       *string            `json:"email" validate:"required"`
+	Phone       *string            `json:"phone"`
+	IsFreeAgent bool               `json:"is_free_agent"`
 	Games       []primitive.ObjectID `json:"games"`
-	Followers []string `json:"followers"`
-	Following []string `json:"following"`
+	Followers   []string           `json:"followers"`
+	Following   []string           `json:"following"`
+	Level       *string            `json: "level"`
 	// UserId string `json:"user_id"`
 }
 
@@ -166,12 +168,12 @@ func (u *User) GetGamesList() ([]*Game, error) {
 	dbInstance, err := db.GetDatabase()
 
 	if err != nil {
-			return err
+		return err
 	}
 	collection, err := dbInstance.OpenCollection("Users")
 
 	if err != nil {
-			return err
+		return err
 	}
 
 	//append to my following
@@ -180,4 +182,52 @@ func (u *User) GetGamesList() ([]*Game, error) {
 	_, err = collection.UpdateOne(context.TODO(), filter, update)
 
 	return err
+}
+
+func (u *User) CountFollowers() int {
+	return len(u.Followers)
+}
+
+func (u *User) CountFollowing() int {
+	return len(u.Following)
+}
+
+func (u *User) GetLevel() string {
+	filter := bson.D{{Key: "email", Value: u.Email}}
+	res := &User{}
+	dbInstance, err := db.GetDatabase()
+
+	if err != nil {
+		return ""
+	}
+
+	collection, err := dbInstance.OpenCollection("Users")
+
+	if err != nil {
+		return ""
+
+	}
+	err = collection.FindOne(context.TODO(), filter).Decode(res)
+
+	return *res.Level
+	// return *u.Level
+}
+
+func (u *User) ChangeLevel(level string) (*mongo.UpdateResult, error) {
+	dbInstance, err := db.GetDatabase()
+	if err != nil {
+		return nil, err
+	}
+	collection, err := dbInstance.OpenCollection("Users")
+
+	if err != nil {
+		return nil, err
+	}
+
+	//append to my following
+	filter := bson.D{{Key: "email", Value: u.Email}}
+	update := bson.D{{Key: "$set", Value: bson.D{{Key: "level", Value: level}}}}
+	res, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	return res, err
 }
