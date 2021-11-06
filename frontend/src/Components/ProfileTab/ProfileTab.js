@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import avatar from '../../assets/Avatar.png'
 import follow from "../../assets/FollowButton.png"
 
@@ -10,7 +10,6 @@ const ProfileBar = () =>{
 
         const userToken = localStorage.getItem('userToken')
         const [name, setName] = useState('');
-
 
         useEffect(() => {
 
@@ -66,6 +65,7 @@ const ProfileBar = () =>{
                 <Col>Followers</Col>
                 <Col>Following</Col>
                 <Col>Level</Col>
+                <Col></Col>
             </Row>
             {/* Actual data for the above categories */}
             <Row className="followingNumbers">
@@ -74,7 +74,6 @@ const ProfileBar = () =>{
                 <Col>Amateur</Col>
             </Row>
             </div>
-            
         </Container>
     );
 }
