@@ -1,9 +1,9 @@
 
 import React, {useEffect, useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import avatar from "../assets/Avatar.png"
+import avatar from "../../assets/Avatar.png"
 import Drop from "./DropDown"
-import follow from "../assets/FollowButton.png"
+import follow from "../../assets/FollowButton.png"
 
 
 import 'semantic-ui-css/components/dropdown.min.css'
