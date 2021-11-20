@@ -1,11 +1,19 @@
 
 import React, {useEffect, useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
+<<<<<<< HEAD:frontend/src/Components/ProfileTab/ProfileTab.js
 import avatar from "../assets/Avatar.png"
 import Drop from "./DropDown"
 import follow from "../assets/FollowButton.png"
 
 
+=======
+import avatar from "../../assets/Avatar.png"
+import Drop from "./DropDown"
+import follow from "../../assets/FollowButton.png"
+
+
+>>>>>>> 856e2c9af67b00e631c4d49d07d5d424b1d8ff66:frontend/src/Components/ProfileTab.js
 import 'semantic-ui-css/components/dropdown.min.css'
 import 'semantic-ui-css/components/menu.min.css'
 import 'semantic-ui-css/components/list.min.css'
