@@ -21,7 +21,7 @@ type Game struct {
 }
 
 func (g *Game) Insert() (*string, error) {
-
+	//edit
 	dbInstance, err := db.GetDatabase()
 
 	if err != nil {
