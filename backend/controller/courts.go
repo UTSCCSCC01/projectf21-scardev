@@ -17,7 +17,7 @@ func initCourt(r *http.Request) (*models.Court, error) {
 	err := json.NewDecoder(r.Body).Decode(court)
 
 	if err != nil {
-		return nil, err
+		return nil,  err
 	}
 
 	court.ID = primitive.NewObjectID()
