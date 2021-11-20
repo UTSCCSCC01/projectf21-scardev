@@ -31,7 +31,7 @@ func (g *Game) Insert() (*string, error) {
 	collection, err := dbInstance.OpenCollection("Games")
 
 	if err != nil {
-		return nil, err
+		return nil,  err
 	}
 
 	res, err := collection.InsertOne(context.TODO(), g)
